@@ -23,13 +23,15 @@ public class CustomerServiceImpl  implements CustomerService {
         Customer customer = new Customer();
         customer.setName(customerPojo.getName());
         customer.setEmail(customerPojo.getEmail());
+        customer.setAddress(customerPojo.getAddress());
+        customer.setContactNumber(customerPojo.getContactNumber());
         customerRespository.save(customer);
         return customer;
     }
 
     @Override
     public List<Customer> getAllCustomers() {
-        return customerRespository.findAll() ;
+        return customerRespository.findAll();
     }
 
     @Override

@@ -12,15 +12,21 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping("/save")
-    public void save(@RequestBody CustomerPojo customerPojo) {
+    @GetMapping
+    public void getAllCustomers() {
+        this.customerService.getAllCustomers();
+    }
 
+    @PostMapping()
+    public void save(@RequestBody CustomerPojo customerPojo) {
         this.customerService.saveCustomer((customerPojo));
     }
+
     @PutMapping
     public void updateCustomer(@RequestBody CustomerPojo customerPojo) {
         this.customerService.updateCustomer((customerPojo));
     }
+
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id) {
         this.customerService.deleteCustomerById(id);
@@ -30,10 +36,7 @@ public class CustomerController {
     public void getCustomer(@PathVariable int id) {
         this.customerService.getCustomerById(id);
     }
-    @GetMapping
-    public void getAllCustomers() {
-        this.customerService.getAllCustomers();
-    }
+
 
 
 

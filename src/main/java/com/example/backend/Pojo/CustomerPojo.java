@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CustomerPojo {
-    private int id;
     private String name;
+    private String contactNumber;
     private String email;
-    private String phone;
+    private String address;
 }
