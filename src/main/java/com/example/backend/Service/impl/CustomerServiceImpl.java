@@ -46,8 +46,9 @@ public class CustomerServiceImpl  implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(CustomerPojo customerPojo) {
+    public Customer updateCustomer(CustomerPojo customerPojo) {
 
+        return null;
     }
 
     @Override
