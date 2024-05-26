@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Table(name = "bike")
 @Getter
 @Setter
-public class Bike {
+public class Bike  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

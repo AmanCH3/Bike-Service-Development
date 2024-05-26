@@ -55,12 +55,23 @@ public class BikeController {
     public GlobalApiResponse<String> delete(@PathVariable int id) {
         this.bikeCenter.deleteBike(id);
         return GlobalApiResponse.<String>builder()
-                .data("Bike with id "+ id +"has been deleted successfully")
+                .data("Bike with id "+ id +" has been deleted successfully")
                 .statusCode(200)
                 .message("Delete successufully")
                 .build() ;
 
     }
+
+    @GetMapping("get/{id}")
+    public GlobalApiResponse<String> getBike(@PathVariable int id, String brand , String model , String registrationNumber) {
+        this.bikeCenter.getBikeById(id);
+        return GlobalApiResponse.<String>builder()
+                .data("Bike with id "+ id + "with the " + brand + "of "+ model+"  with registration number "+ registrationNumber)
+                .statusCode(200)
+                .message("Data retieved")
+                .build() ;
+    }
+
 
 
 

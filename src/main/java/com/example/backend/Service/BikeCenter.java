@@ -11,6 +11,7 @@ public interface BikeCenter {
 
     List<Bike> getAllBike(BikePojo bikePojo);
     Bike getBikeById(int id);
+
     List<Bike> saveBike(BikePojo bikePojo);
     void deleteBike(int id);
 
