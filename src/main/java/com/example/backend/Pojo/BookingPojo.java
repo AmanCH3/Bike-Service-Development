@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class BookingPojo {
-
-
+    private String location;
+    private String ContactNumber ;
 
 
 

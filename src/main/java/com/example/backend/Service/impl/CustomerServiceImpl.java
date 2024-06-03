@@ -6,14 +6,12 @@ import com.example.backend.Pojo.CustomerPojo;
 import com.example.backend.Repository.CustomerRespository;
 import com.example.backend.Service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Repository
 @RequiredArgsConstructor
 public class CustomerServiceImpl  implements CustomerService {
     private final CustomerRespository customerRespository;

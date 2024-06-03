@@ -2,6 +2,7 @@ package com.example.backend.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
 @Table(name = "service")
 @Getter
 @Setter
+@AllArgsConstructor
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +34,8 @@ public class Service {
     @Column(name = "cost")
     private double cost;
 
+
+    public Service() {
+
+    }
 }

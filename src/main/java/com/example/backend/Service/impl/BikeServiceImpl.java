@@ -5,14 +5,12 @@ import com.example.backend.Pojo.BikePojo;
 import com.example.backend.Repository.BikeRepository;
 import com.example.backend.Service.BikeCenter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Repository
 @Service
 @RequiredArgsConstructor
 public class BikeServiceImpl implements BikeCenter {
