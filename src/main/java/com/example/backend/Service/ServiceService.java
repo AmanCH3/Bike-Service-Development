@@ -1,13 +1,12 @@
 package com.example.backend.Service;
 
-import com.example.backend.Entity.Customer;
 import com.example.backend.Entity.Service;
 import com.example.backend.Pojo.ServicePojo;
 
 import java.util.List;
 
 public interface ServiceService {
-    List<Customer> getAllServices();
+    List<Service> getAllServices();
 
     Service getServiceById(int id);
 

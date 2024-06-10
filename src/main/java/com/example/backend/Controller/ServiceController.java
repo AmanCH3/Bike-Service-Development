@@ -1,6 +1,5 @@
 package com.example.backend.Controller;
 
-import com.example.backend.Entity.Customer;
 import com.example.backend.Entity.Service;
 import com.example.backend.Pojo.ServicePojo;
 import com.example.backend.Service.ServiceService;
@@ -17,9 +16,9 @@ public class ServiceController {
 
     private final ServiceService serviceService;
     @GetMapping
-    public GlobalApiResponse<List<Customer>> getAllServices() {
+    public GlobalApiResponse<List<Service>> getAllServices() {
         return GlobalApiResponse.
-                <List<Customer>>builder()
+                <List<Service>>builder()
                 .data(this.serviceService.getAllServices())
                 .statusCode(200)
                 .message("data retreived successfully")

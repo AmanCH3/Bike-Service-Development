@@ -9,11 +9,16 @@ import java.util.List;
 @Repository
 public interface BikeCenter {
 
+    Bike saveOrUpdateBike(int id, BikePojo bikePojo);
+
+    List<Bike> getAllBikes(BikePojo bikePojo);
+
     List<Bike> getAllBike(BikePojo bikePojo);
     Bike getBikeById(int id);
 
-    List<Bike> saveBike(BikePojo bikePojo);
+    Bike saveBike(BikePojo bikePojo);
     void deleteBike(int id);
+
 
 
 }

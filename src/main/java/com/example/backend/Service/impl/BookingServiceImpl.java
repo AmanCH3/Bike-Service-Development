@@ -14,12 +14,16 @@ import java.util.List;
 public class BookingServiceImpl implements BookingService {
     private final BookingRespository bookingRespository;
 
+
     @Override
     public BookingCenter saveBook(BookingPojo bookingPojo) {
-        BookingCenter book = new BookingCenter();
-        book.setContactNumber(bookingPojo.getContactNumber());
-        book.setLocation(bookingPojo.getLocation());
-        return null ;
+        BookingCenter bookingCenter = new BookingCenter();
+        bookingCenter.setLocation(bookingPojo.getLocation());
+        bookingCenter.setContactNumber(bookingPojo.getContactNumber());
+
+         //  repository .....................
+//       bookingRespository.save(bookingCenter) ;
+        return bookingCenter ;
     }
 
     @Override

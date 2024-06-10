@@ -1,6 +1,5 @@
 package com.example.backend.Service.impl;
 
-import com.example.backend.Entity.Customer;
 import com.example.backend.Entity.Service;
 import com.example.backend.Pojo.ServicePojo;
 import com.example.backend.Repository.ServiceRespository;
@@ -17,7 +16,7 @@ public class ServiceServiceImpl  implements ServiceService {
     private final ServiceRespository serviceRespository ;
 
     @Override
-    public List<Customer> getAllServices() {
+    public List<Service> getAllServices() {
         return  serviceRespository.findAll() ;
     }
 
