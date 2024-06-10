@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -32,6 +34,11 @@ public class Customer {
     @Column(name = "contact_number", nullable = false)
     private String contactNumber;
 
+    @NotBlank(message = "Password is mandatory")
+    @Size(max = 100, message = "Password cannot be longer than 100 characters")
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email should be valid")
     @Column(name = "email", nullable = false)
@@ -41,6 +48,18 @@ public class Customer {
     @Size(max = 255, message = "Address cannot be longer than 255 characters")
     @Column(name = "address", nullable = false)
     private String address;
+
+    @NotBlank(message = "Role is mandatory")
+    @Column(name = "role", nullable = false)
+    private String role; // admin and customer and switch the things accordingly
+
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Bike> bike;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookingCenter> bookingCenters;
+
 
 
     public Customer() {

@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "service")
@@ -34,8 +35,20 @@ public class Service {
     @Column(name = "cost")
     private double cost;
 
+     //FK
+     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderService> orderServices;
+
+
+
+
+
 
     public Service() {
 
     }
 }
+//User (1) ----------- (M) Vehicle
+//User (1) ----------- (M) Order
+//Order (1) ---------- (M) OrderService
+//Service (1) -------- (M) OrderService

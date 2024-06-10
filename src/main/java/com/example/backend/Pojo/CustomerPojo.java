@@ -12,4 +12,6 @@ public class CustomerPojo {
     private String contactNumber;
     private String email;
     private String address;
+    private String role ; // Admin or User
+    private String password;
 }
