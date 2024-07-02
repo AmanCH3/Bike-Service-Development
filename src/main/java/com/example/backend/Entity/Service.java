@@ -9,7 +9,6 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "service")
@@ -34,11 +33,6 @@ public class Service {
     @NotNull(message = "Cost is mandatory")
     @Column(name = "cost")
     private double cost;
-
-     //FK
-     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderService> orderServices;
-
 
 
 

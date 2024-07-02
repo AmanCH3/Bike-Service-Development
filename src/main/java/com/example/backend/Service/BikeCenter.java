@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface BikeCenter {
 
-    Bike saveOrUpdateBike(int id, BikePojo bikePojo);
+
 
     List<Bike> getAllBikes(BikePojo bikePojo);
 
@@ -18,7 +18,7 @@ public interface BikeCenter {
 
     Bike saveBike(BikePojo bikePojo);
     void deleteBike(int id);
-
+    Bike saveOrUpdateBike(int id ,BikePojo bikePojo);
 
 
 }

@@ -61,7 +61,6 @@ public class Customer {
     private List<BookingCenter> bookingCenters;
 
 
-
     public Customer() {
 
     }

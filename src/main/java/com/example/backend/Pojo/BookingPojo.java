@@ -11,7 +11,6 @@ import lombok.Setter;
 public class BookingPojo {
     private String location;
     private String ContactNumber ;
-    private String BookingDate; // Date
-    private String BookingStatus; // Status
+
 
 }

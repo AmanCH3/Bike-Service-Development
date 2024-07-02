@@ -16,25 +16,16 @@ public class BikeServiceImpl implements BikeCenter {
 
     private final BikeRepository bikeRepository;
 
-    @Override
-    public Bike saveOrUpdateBike(int id, BikePojo bikePojo) {
-        Bike bike = new Bike();
 
-        bike.setBrand(bikePojo.getBrand());
-        bike.setModel(bikePojo.getModel());
-        bike.setRegistrationNumber(bikePojo.getRegistrationNumber());
-
-        return bikeRepository.save(bike);
-    }
 
     @Override
     public List<Bike> getAllBikes(BikePojo bikePojo) {
-        return bikeRepository.findAll();
+        return List.of();
     }
 
     @Override
     public List<Bike> getAllBike(BikePojo bikePojo) {
-        return List.of();
+        return bikeRepository.findAll() ;
     }
 
     @Override
@@ -48,6 +39,11 @@ public class BikeServiceImpl implements BikeCenter {
         return null;
     }
 
+//    @Override
+//    public Bike saveBike(BikePojo bikePojo) {
+//        return null;
+//    }
+
     @Override
     public void deleteBike(int id) {
         if (!bikeRepository.existsById(id)) {
@@ -55,4 +51,19 @@ public class BikeServiceImpl implements BikeCenter {
         }
         bikeRepository.deleteById(id);
     }
-}
+
+    @Override
+    public Bike saveOrUpdateBike(int id ,BikePojo bikePojo) {
+        Bike bike = new Bike();
+
+        bike.setBrand(bikePojo.getBrand());
+        bike.setModel(bikePojo.getModel());
+        bike.setRegistrationNumber(bikePojo.getRegistrationNumber());
+
+        return bikeRepository.save(bike);
+    }
+    }
+
+
+
+
