@@ -7,6 +7,7 @@ import com.example.backend.Service.ServiceService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @org.springframework.stereotype.Service
@@ -17,33 +18,30 @@ public class ServiceServiceImpl  implements ServiceService {
 
     @Override
     public List<Service> getAllServices() {
+
         return  serviceRespository.findAll() ;
     }
 
     @Override
-    public Service getServiceById(int id) {
-        return  serviceRespository.findById(id).get();
+    public Optional<Service> getServiceById(Long id) {
+
+        return  serviceRespository.findById(id);
 
     }
 
-    @Override
-    public Service addService(ServicePojo servicePojo) {
-        return serviceRespository.save(servicePojo);
-    }
 
     public Service updateService(ServicePojo servicePojo) {
-       Service service = new Service() ;
-       service.setServiceId(service.getServiceId());
-       service.setCost(service.getCost());
-       service.setDescription(service.getServiceName());
+       Service service = new Service();
+       service.setServiceName(servicePojo.getServiceName()) ;
+       service.setCost(servicePojo.getCost());
+       service.setDescription(servicePojo.getServiceName());
+       return  serviceRespository.save(service);
 
-       serviceRespository.save(service);
-
-      return  service ;
     }
 
     @Override
-    public void deleteService(int id) {
+    public void deleteService(Long id) {
+        serviceRespository.deleteById(id);
 
     }
 
