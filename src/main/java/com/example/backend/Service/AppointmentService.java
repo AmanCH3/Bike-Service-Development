@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface AppointmentService {
     Appoinment saveOrUpdateAppointment(AppointmentPojo appointmentPojo);
-    List<Appoinment> getAllAppointment();
+    List<Appoinment> getAllAppointment(AppointmentPojo appointmentPojo);
     Appoinment getAppointmentById(int id);
-    void deleteAppointmentById(int id);
+    Object deleteAppointmentById(int id);
 
 }

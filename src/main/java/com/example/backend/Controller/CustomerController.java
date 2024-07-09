@@ -28,10 +28,10 @@ public class CustomerController {
     }
 
     @PostMapping
-    public GlobalApiResponse<String> createCustomer(@RequestBody CustomerPojo customerPojo) {
-        this.customerService.saveCustomer(customerPojo);
-         return  GlobalApiResponse.<String>builder()
-                 .data("Saved")
+    public GlobalApiResponse<Customer> createCustomer(@RequestBody CustomerPojo customerPojo) {
+        Customer customer = this.customerService.saveCustomer(customerPojo);
+         return  GlobalApiResponse.<Customer>builder()
+                 .data(customer)
                  .statusCode(200)
                  .message("data saved succesfully")
                  .build();
@@ -48,7 +48,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("delete/{id}")
-    public GlobalApiResponse<Object> deleteCustomer(@PathVariable int id){
+    public GlobalApiResponse<Object> deleteCustomer(@PathVariable Long id){
         this.customerService.deleteCustomerById(id);
         return  GlobalApiResponse.builder().
                 data("Customer with id" + id + " has been successfully")

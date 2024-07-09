@@ -35,8 +35,6 @@ public class Service {
     private double cost;
 
 
-
-
     public Service() {
 
     }

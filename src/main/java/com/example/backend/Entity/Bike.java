@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "bike")
@@ -24,8 +23,8 @@ public class Bike  {
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookingCenter> bookingCenter;
+//    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<BookingCenter> bookingCenter;
 
     @NotBlank(message = "Brand is mandatory")
     @Size(max = 100, message = "Brand cannot be longer than 100 characters")

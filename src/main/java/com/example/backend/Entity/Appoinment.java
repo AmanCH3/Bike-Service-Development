@@ -1,3 +1,4 @@
+
 package com.example.backend.Entity;
 
 import jakarta.persistence.*;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 @Table(name = "appoinment")
@@ -22,10 +22,14 @@ public class Appoinment {
     @Column(name = "appointment_id")
     private Long appointmentId;
 
-    @ManyToOne
+
+
+
+//    ==========one customer can book only one appointment ===========
+    @OneToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     private Customer customer;
-
+//    ================many booking center has one appointment=======
     @ManyToOne
     @JoinColumn(name = "center_id", referencedColumnName = "center_id", nullable = false)
     private BookingCenter bookingCenter;
@@ -36,11 +40,18 @@ public class Appoinment {
 
     @NotNull(message = "Appointment date is mandatory")
     @Column(name = "appointment_date", nullable = false)
-    private Date appointmentDate;
+    private String appointmentDate;
 
     @NotNull(message = "Status is mandatory")
     @Column(name = "status", nullable = false)
     private String status;
+
+    @NotNull(message = "Payment first")
+    @Column(name = "Amount" , nullable = false)
+    private Double paymentFirst;
+
+    @Column(name = "payment type" ,nullable = true)
+    private String paymentType;
 
 }
 

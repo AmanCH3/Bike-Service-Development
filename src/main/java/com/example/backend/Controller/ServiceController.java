@@ -5,7 +5,6 @@ import com.example.backend.Pojo.ServicePojo;
 import com.example.backend.Service.ServiceService;
 import com.example.backend.shared.pojo.GlobalApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,11 +44,15 @@ public class ServiceController {
                 .build() ;
     }
     @PostMapping
-    public ResponseEntity<GlobalApiResponse<Service>> addService(@RequestBody ServicePojo servicePojo) {
-        Service service=serviceService.updateService(servicePojo);
-//        this.serviceService.updateService(servicePojo);
-        GlobalApiResponse<Service> response=new GlobalApiResponse<>("crerated ",200,service);
-        return ResponseEntity.ok(response);
+    public GlobalApiResponse<Service> addService(@RequestBody ServicePojo servicePojo) {
+
+       Service newService = this.serviceService.updateService(servicePojo);
+
+        return  GlobalApiResponse.<Service>builder().
+                data(newService)
+                .statusCode(200)
+                .message("Data has been updated")
+                .build() ;
 
     }
 

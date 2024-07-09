@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class BikePojo {
+    private int customerId ;
     private String brand;
     private String model;
     private String registrationNumber ;

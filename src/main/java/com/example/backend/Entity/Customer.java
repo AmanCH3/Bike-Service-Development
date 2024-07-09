@@ -1,5 +1,6 @@
 package com.example.backend.Entity;
 
+import com.example.backend.enumType.UserType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -20,7 +20,8 @@ import java.util.List;
 
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_setup_seq_gen")
+    @SequenceGenerator(name="customer_setup_seq_gen" , sequenceName = "customer_setup_seq", allocationSize = 101)
     @Column(name = "customer_id")
     private Long customerId;
 
@@ -34,10 +35,6 @@ public class Customer {
     @Column(name = "contact_number", nullable = false)
     private String contactNumber;
 
-    @NotBlank(message = "Password is mandatory")
-    @Size(max = 100, message = "Password cannot be longer than 100 characters")
-    @Column(name = "password", nullable = false)
-    private String password;
 
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email should be valid")
@@ -49,17 +46,19 @@ public class Customer {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @NotBlank(message = "Role is mandatory")
-    @Column(name = "role", nullable = false)
-    private String role; // admin and customer and switch the things accordingly
+    @Column(nullable = false)
+    private String password ;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserType role = UserType.ADMIN;
 
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Bike> bike;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookingCenter> bookingCenters;
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Bike> bike;
 
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<BookingCenter> bookingCenters;
 
     public Customer() {
 

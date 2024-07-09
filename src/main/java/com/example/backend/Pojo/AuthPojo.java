@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ServicePojo {
-    private String serviceName;
-    private String serviceDescription;
-    private double cost;
+@NoArgsConstructor
+public class AuthPojo {
+    private String email;
+    private String password;
 }

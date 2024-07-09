@@ -16,9 +16,12 @@ import java.util.Optional;
 public class CustomerServiceImpl  implements CustomerService {
     private final CustomerRespository customerRespository;
 
+
+//    ===========saveOrUpdate the data ================
     @Override
     public Customer saveCustomer(CustomerPojo customerPojo) {
         Customer customer = new Customer();
+
         customer.setName(customerPojo.getName());
         customer.setEmail(customerPojo.getEmail());
         customer.setAddress(customerPojo.getAddress());
@@ -29,28 +32,31 @@ public class CustomerServiceImpl  implements CustomerService {
 
     @Override
     public List<Customer> getAllCustomers() {
+
         return customerRespository.findAll();
     }
 
     @Override
-    public Customer getCustomerById(int id) {
-        return customerRespository.findById(id).get() ;
+    public Customer getCustomerById(Long id) {
+
+        return customerRespository.findById(id).get();
     }
 
     @Override
-    public void deleteCustomerById(int id) {
+    public void deleteCustomerById(Long id) {
          customerRespository.deleteById(id);
 
     }
 
     @Override
     public Customer updateCustomer(CustomerPojo customerPojo) {
+
         return null;
     }
 
     @Override
-    public Optional<Customer> findById(int id) {
+    public Optional<Customer> findById(Long id) {
 
-        return Optional.empty();
+        return customerRespository.findById(id) ;
     }
 }

@@ -18,11 +18,13 @@ public class AppointmentServiceImpl  implements AppointmentService {
         Appoinment appoinment = new Appoinment() ;
         appoinment.setAppointmentDate(appointmentPojo.getDate());
         appoinment.setStatus(appointmentPojo.getStatus());
+        appoinment.setPaymentFirst(appointmentPojo.getPaymentFirst());
+        appoinment.setPaymentType(appointmentPojo.getPaymentType());
       return appointmentRespository.save(appoinment) ;
     }
 
     @Override
-    public List<Appoinment> getAllAppointment() {
+    public List<Appoinment> getAllAppointment(AppointmentPojo appointmentPojo) {
         return appointmentRespository.findAll() ;
     }
 
@@ -32,8 +34,9 @@ public class AppointmentServiceImpl  implements AppointmentService {
     }
 
     @Override
-    public void deleteAppointmentById(int id) {
+    public Object deleteAppointmentById(int id) {
         appointmentRespository.deleteById(id);
 
+        return null;
     }
 }

@@ -8,9 +8,7 @@ import java.util.Optional;
 
 public interface ServiceService {
     List<Service> getAllServices();
-
     Optional<Service> getServiceById(Long id);
-
 
     Service updateService(ServicePojo servicePojo);
 

@@ -13,3 +13,4 @@ import lombok.*;
         private Integer statusCode ;
         private T data ;
     }
+

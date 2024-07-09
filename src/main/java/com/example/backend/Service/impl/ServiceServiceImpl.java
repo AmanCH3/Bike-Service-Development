@@ -24,18 +24,16 @@ public class ServiceServiceImpl  implements ServiceService {
 
     @Override
     public Optional<Service> getServiceById(Long id) {
-
         return  serviceRespository.findById(id);
-
     }
-
 
     public Service updateService(ServicePojo servicePojo) {
        Service service = new Service();
        service.setServiceName(servicePojo.getServiceName()) ;
        service.setCost(servicePojo.getCost());
        service.setDescription(servicePojo.getServiceName());
-       return  serviceRespository.save(service);
+        serviceRespository.save(service);
+       return service ;
 
     }
 

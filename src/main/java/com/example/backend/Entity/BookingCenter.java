@@ -31,16 +31,13 @@ public class BookingCenter {
     @Column(name = "contact_number", nullable = false)
     private String contactNumber;
 
-
     @ManyToOne
     @JoinColumn(name = "bike_id", referencedColumnName = "bike_id", nullable = false)
     private Bike bike;
 
-
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     private Customer customer;
-
 
 
 
