@@ -1,8 +1,7 @@
 import BookingSection from "./component/bookingsection/BookingComponent";
 import HeroSection from "./component/herosection/HeroSection";
+import SechulingCalander from "./component/herosection/SechulingCalander";
 import NavBar from "./component/navbar/NavBar";
-import Login from "./component/auth/Login";
-import LoginPage from "./component/model/LoginPage";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -12,6 +11,7 @@ function App() {
       <NavBar />
       <HeroSection />
       <BookingSection />
+      <SechulingCalander />
     </div>
   );
 }

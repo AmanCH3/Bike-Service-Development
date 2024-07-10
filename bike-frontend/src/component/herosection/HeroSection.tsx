@@ -6,8 +6,8 @@ const HeroSection: React.FC = () => {
   const hover = "hover:scale-110 transition-transform duration-500 ease-in-out";
   return (
     <section className="text-center">
-      <h1 className="text-[42px] font-bold mb-4  leading-[50px] ">
-        Door Step <br /> Two Wheeler Servicing
+      <h1 className="text-[60px] font-bold mb-4  leading-[50px] ">
+        Door Step <br className="mb-6" /> Two Wheeler Servicing
       </h1>
       <p className="text-lg text-service mb-2 ">
         Service at your home or office, 7 days a week, <br /> fair and

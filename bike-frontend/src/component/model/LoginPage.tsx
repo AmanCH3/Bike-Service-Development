@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import React from "react";
 const LoginPage = () => {
   return (
     <div className="min-h-screen bg-zinc-100 flex flex-col items-center py-10">
