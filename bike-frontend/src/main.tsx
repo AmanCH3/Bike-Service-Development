@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Booking from "./Dashboard/booking";
-import LoginPage from "./component/model/LoginPage";
-import RegisterPage from "./component/model/RegisterPage";
+import Booking from "./component/pages/booking";
+import LoginPage from "./component/pages/LoginPage";
+import RegisterPage from "./component/pages/RegisterPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={new QueryClient()}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

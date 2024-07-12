@@ -1,101 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-
-interface Order {
-  id: string;
-  date: string;
-  customer: string;
-  amount: string;
-  payment: string;
-  status: string;
-}
+import { getOrders } from "../../services/orders.api";
+import { Order } from "../../utils/constants";
+import DeleteOrderModal from "../modal/delete-order-modal";
 
 const OrderTable: React.FC = () => {
-  const orders: Order[] = [
-    {
-      id: "#Inv0561",
-      date: "18 Nov 2023",
-      customer: "Esther Howard",
-      amount: "$456",
-      payment: "Bank",
-      status: "Processing",
-    },
-    {
-      id: "#Inv0562",
-      date: "18 Nov 2023",
-      customer: "Robert Fox",
-      amount: "$257",
-      payment: "Cash",
-      status: "Processing",
-    },
-    {
-      id: "#Inv0563",
-      date: "18 Nov 2023",
-      customer: "Cameron Williamson",
-      amount: "$89",
-      payment: "Cash",
-      status: "Delivered",
-    },
-    {
-      id: "#Inv0564",
-      date: "18 Nov 2023",
-      customer: "Jacob Jones",
-      amount: "$453",
-      payment: "Card",
-      status: "Delivered",
-    },
-    {
-      id: "#Inv0565",
-      date: "18 Nov 2023",
-      customer: "Bessie Cooper",
-      amount: "$121",
-      payment: "Bank",
-      status: "Cancel",
-    },
-    {
-      id: "#Inv0566",
-      date: "18 Nov 2023",
-      customer: "Floyd Miles",
-      amount: "$145",
-      payment: "Bank",
-      status: "Delivered",
-    },
-    {
-      id: "#Inv0567",
-      date: "18 Nov 2023",
-      customer: "Annette Black",
-      amount: "$155",
-      payment: "Bank",
-      status: "Delivered",
-    },
-    {
-      id: "#Inv0568",
-      date: "18 Nov 2023",
-      customer: "Darlene Robertson",
-      amount: "$145",
-      payment: "Bank",
-      status: "Delivered",
-    },
-    {
-      id: "#Inv0569",
-      date: "18 Nov 2023",
-      customer: "Marvin McKinney",
-      amount: "$125",
-      payment: "Bank",
-      status: "Delivered",
-    },
-    {
-      id: "#Inv0570",
-      date: "18 Nov 2023",
-      customer: "Floyd Miles",
-      amount: "$145",
-      payment: "Bank",
-      status: "Delivered",
-    },
-  ];
-
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isUpdatePopupOpen, setIsUpdatePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+
+  const {
+    isPending,
+    isError,
+    data: fetchedOrders,
+    error,
+  } = useQuery({
+    queryKey: ["orders"],
+    queryFn: getOrders,
+  });
 
   const handleUpdate = (order: Order) => {
     setSelectedOrder(order);
@@ -116,6 +38,10 @@ const OrderTable: React.FC = () => {
     setIsDeletePopupOpen(false);
     setSelectedOrder(null);
   };
+
+  if (isPending) return <div>Loading...</div>;
+
+  if (isError) return <div>Error... {error.message}</div>;
 
   return (
     <div className="bg-white p-4 rounded shadow">
@@ -139,7 +65,7 @@ const OrderTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
+          {fetchedOrders?.map((order) => (
             <tr key={order.id} className="border-b border-border">
               <td className="py-2">{order.id}</td>
               <td className="py-2">{order.date}</td>
@@ -194,19 +120,10 @@ const OrderTable: React.FC = () => {
       )}
 
       {isDeletePopupOpen && selectedOrder && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-          <div className="bg-white p-4 rounded shadow-lg">
-            <h2 className="mb-4">Delete Order</h2>
-            <p>Are you sure you want to delete order ID: {selectedOrder.id}?</p>
-            <button
-              className="btn btn-secondary mr-2"
-              onClick={closeDeletePopup}
-            >
-              Cancel
-            </button>
-            <button className="btn btn-danger">Delete</button>
-          </div>
-        </div>
+        <DeleteOrderModal
+          selectedOrder={selectedOrder}
+          closeDeletePopup={closeDeletePopup}
+        />
       )}
     </div>
   );

@@ -1,6 +1,6 @@
-import Sidebar from "./Sidebar";
-import Header from "./header";
-import OrderTable from "./OrderTable";
+import Sidebar from "../dashboard/Sidebar";
+import Header from "../dashboard/header";
+import OrderTable from "../dashboard/OrderTable";
 
 const Booking = () => {
   return (

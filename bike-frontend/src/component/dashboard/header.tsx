@@ -1,4 +1,3 @@
-import React from "react";
 import { BellIcon, UserIcon } from "@heroicons/react/16/solid";
 
 function Form() {
