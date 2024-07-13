@@ -3,7 +3,7 @@ import { Order } from "../../utils/constants";
 
 interface UpdateOrderModalProps {
   selectedOrder: Order;
-  openUpdatePopup: () => void;
+  openAddPopup: () => void;
 }
 
 const addOrderModal: React.FC<UpdateOrderModalProps> = ({
