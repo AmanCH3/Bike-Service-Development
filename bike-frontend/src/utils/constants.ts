@@ -1,3 +1,6 @@
+import dashboard from "../assets/dashboard.png";
+import order from "../assets/order.png";
+
 export interface Order {
   id: string;
   date: string;
@@ -87,5 +90,42 @@ export const orders: Order[] = [
     amount: "$145",
     payment: "Bank",
     status: "Delivered",
+  },
+];
+
+/*
+  Menu items (navbar)
+  =====================================
+*/
+export const navItems = [
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: dashboard,
+    activeClass: "text-muted-foreground hover:bg-muted",
+  },
+  {
+    name: "Order",
+    path: "/dashboard/order",
+    icon: order,
+    activeClass: "text-primary bg-primary-foreground",
+  },
+  {
+    name: "Vehicle",
+    path: "/dashboard/vehicle",
+    icon: "https://t3.ftcdn.net/jpg/01/71/13/24/360_F_171132449_uK0OO5XHrjjaqx5JUbJOIoCC3GZP84Mt.jpg",
+    activeClass: "text-muted-foreground hover:bg-muted",
+  },
+  {
+    name: "Service",
+    path: "/dashboard/service",
+    icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLPBeEdTkyeK0usr_dTXr-6x62M3GcJy7KFA&s",
+    activeClass: "text-muted-foreground hover:bg-muted",
+  },
+  {
+    name: "Log out",
+    path: "/dashboard/logout",
+    icon: "https://cdn0.iconfinder.com/data/icons/glyph-2-ui-part-1-of-4/100/pack02-05-512.png",
+    activeClass: "text-muted-foreground hover:bg-muted",
   },
 ];
