@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { getOrders } from "../../services/orders.api";
 import { Order } from "../../utils/constants";
 import DeleteOrderModal from "../modal/delete-order-modal";
+import UpdateOrderModal from "../modal/update-order-modal";
 
 const OrderTable: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
@@ -103,20 +104,10 @@ const OrderTable: React.FC = () => {
       </table>
 
       {isUpdatePopupOpen && selectedOrder && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-          <div className="bg-white p-4 rounded shadow-lg">
-            <h2 className="mb-4">Update Order</h2>
-            <p>Order ID: {selectedOrder.id}</p>
-            {/* Add more fields for updating the order as needed */}
-            <button
-              className="btn btn-secondary mr-2"
-              onClick={closeUpdatePopup}
-            >
-              Cancel
-            </button>
-            <button className="btn btn-primary">Save</button>
-          </div>
-        </div>
+        <UpdateOrderModal
+          selectedOrder={selectedOrder}
+          closeUpdatePopup={closeUpdatePopup}
+        />
       )}
 
       {isDeletePopupOpen && selectedOrder && (

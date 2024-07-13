@@ -1,6 +1,5 @@
-import React from "react";
-import dashboard from "../assets/dashboard.png";
-import order from "../assets/order.png";
+import dashboard from "../../assets/dashboard.png";
+import order from "../../assets/order.png";
 
 const Sidebar = () => {
   return (

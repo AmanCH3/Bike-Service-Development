@@ -1,19 +1,17 @@
+import React from "react";
 import { BellIcon, UserIcon } from "@heroicons/react/16/solid";
 
-function Form() {
-  function handleSubmit(e: any) {
-    e.preventDefault;
-    console.log("You have clicked has new order");
-  }
+interface HeaderProps {
+  onAddOrder: () => void;
 }
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ onAddOrder }) => {
   return (
     <header className="flex items-center justify-between mb-6">
       <h1 className="text-2xl font-bold text-foreground">Admin</h1>
       <div className="flex items-center space-x-4">
         <button
-          type="submit"
+          onClick={onAddOrder}
           className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700"
         >
           New Order
