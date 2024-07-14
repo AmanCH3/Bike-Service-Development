@@ -1,5 +1,73 @@
-import { Link } from "react-router-dom";
-const LoginPage = () => {
+import React from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  CreateDetailsRequestBody,
+  ApiResponse,
+} from "../../services/auth.type";
+import { createDetails } from "../../services/auth.api";
+
+const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (
+    values: CreateDetailsRequestBody
+  ): Promise<ApiResponse> => {
+    try {
+      console.log("Sending login request with values:", values);
+      const response = await createDetails(values);
+      console.log("Received login response:", response);
+      return response;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error during authentication:", error);
+        console.error("Error code:", error.code);
+        console.error("Error response data:", error.response?.data);
+        console.error("Error response status:", error.response?.status);
+        console.error("Error response headers:", error.response?.headers);
+      } else {
+        console.error("Unexpected error during authentication:", error);
+      }
+      throw new Error("Authentication failed");
+    }
+  };
+
+  const onSubmit = async (
+    values: CreateDetailsRequestBody,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    try {
+      const response = await handleLogin(values);
+      const { token, UserId, UserType } = response.data;
+
+      localStorage.setItem("jwtToken", token); // Save JWT token
+      localStorage.setItem("roles", JSON.stringify(UserType)); // Save roles
+      localStorage.setItem("userID", UserId); // Save userID
+
+      // Role-based redirection
+      if (UserType.includes("ROLE_ADMIN") || UserType === "ADMIN") {
+        navigate("/dashboard");
+      } else {
+        navigate("/user-dashboard");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed. Please check your credentials and try again.");
+    }
+    resetForm(); // Reset the form after submission
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const values: CreateDetailsRequestBody = {
+      email: (form.elements.namedItem("userEmail") as HTMLInputElement).value,
+      password: (form.elements.namedItem("userPassword") as HTMLInputElement)
+        .value,
+    };
+    onSubmit(values, { resetForm: () => form.reset() });
+  };
+
   return (
     <div className="min-h-screen bg-zinc-100 flex flex-col items-center py-10">
       <header className="w-full bg-white shadow-md">
@@ -8,10 +76,10 @@ const LoginPage = () => {
             <h1 className="text-xl font-semibold text-zinc-900">User Login</h1>
           </div>
           <nav className="flex space-x-4">
-            <Link to="/Login" className="text-blue-600 hover:text-blue-800">
+            <Link to="/login" className="text-blue-600 hover:text-blue-800">
               Login
             </Link>
-            <Link to="/Register" className="text-zinc-600 hover:text-zinc-900">
+            <Link to="/register" className="text-zinc-600 hover:text-zinc-900">
               Registration
             </Link>
             <button className="text-zinc-600 hover:text-zinc-900">
@@ -27,31 +95,31 @@ const LoginPage = () => {
       </div>
       <main className="flex-grow w-full max-w-4xl bg-white shadow-md rounded-lg mt-8 p-8">
         <h2 className="text-2xl font-semibold text-zinc-900 mb-6">Login</h2>
-        <form className="grid grid-cols-1 gap-6">
+        <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
           <div>
             <label
-              htmlFor="user-email"
+              htmlFor="userEmail"
               className="block text-sm font-medium text-zinc-700"
             >
               User Email
             </label>
             <input
               type="email"
-              id="user-email"
+              id="userEmail"
               className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2"
               required
             />
           </div>
           <div>
             <label
-              htmlFor="user-password"
+              htmlFor="userPassword"
               className="block text-sm font-medium text-zinc-700"
             >
               User Password
             </label>
             <input
               type="password"
-              id="user-password"
+              id="userPassword"
               className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2"
               required
             />
@@ -77,7 +145,7 @@ const LoginPage = () => {
           <center>
             <button
               type="submit"
-              className="w-96 bg-blue-600 text-white rounded-md py-2  hover:bg-blue-700 transition duration-300 ease-in-out justify-center items-center"
+              className="w-96 bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 transition duration-300 ease-in-out justify-center items-center"
             >
               Login
             </button>

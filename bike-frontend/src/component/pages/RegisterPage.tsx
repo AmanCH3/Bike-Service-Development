@@ -1,7 +1,45 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { BASE_API_URL } from "../../utils/api.constants";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const requestBody: Record<string, string> = {};
+    formData.forEach(function (value, key) {
+      requestBody[key] = value.toString();
+    });
+    const jsonBody = JSON.stringify(requestBody);
+    console.log(jsonBody);
+
+    try {
+      // Send registration request to backend
+      const response = await fetch(`${BASE_API_URL}/customer/details`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonBody,
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+
+      // Redirect to login page after successful registration
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      alert("Registration failed. Please try again.");
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen bg-zinc-100 flex flex-col items-center py-10">
@@ -14,11 +52,11 @@ const RegisterPage = () => {
               </h1>
             </div>
             <nav className="flex space-x-4">
-              <Link to="/Login" className="text-blue-600 hover:text-blue-800">
+              <Link to="/login" className="text-blue-600 hover:text-blue-800">
                 Login
               </Link>
               <Link
-                to="/Register"
+                to="/register"
                 className="text-zinc-600 hover:text-zinc-900"
               >
                 Registration
@@ -40,112 +78,81 @@ const RegisterPage = () => {
           <h2 className="text-2xl font-semibold text-zinc-900 mb-6">
             Registration
           </h2>
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            onSubmit={handleSubmit}
+          >
             <div>
               <label
-                htmlFor="user-email"
+                htmlFor="email"
                 className="block text-sm font-medium text-zinc-700"
               >
                 User Email <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
-                id="user-email"
+                id="email"
+                name="email"
                 className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               />
             </div>
             <div>
               <label
-                htmlFor="confirm-password"
-                className="block text-sm font-medium text-zinc-700"
-              >
-                Confirm Password <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="password"
-                id="confirm-password"
-                className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="user-password"
+                htmlFor="password"
                 className="block text-sm font-medium text-zinc-700"
               >
                 User Password <span className="text-red-500">*</span>
               </label>
               <input
                 type="password"
-                id="user-password"
+                id="password"
+                name="password"
                 className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               />
             </div>
             <div>
               <label
-                htmlFor="username"
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-zinc-700"
+              >
+                Confirm Password <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="name"
                 className="block text-sm font-medium text-zinc-700"
               >
                 Username <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                id="username"
+                id="name"
+                name="name"
                 className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               />
             </div>
             <div>
               <label
-                htmlFor="first-name"
-                className="block text-sm font-medium text-zinc-700"
-              >
-                First Name
-              </label>
-              <input
-                type="text"
-                id="first-name"
-                className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-medium text-zinc-700"
-              >
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="last-name"
-                className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div className="md:col-span-2">
-              <label
-                htmlFor="contact-number"
+                htmlFor="contactNumber"
                 className="block text-sm font-medium text-zinc-700"
               >
                 Contact Number
               </label>
               <input
                 type="tel"
-                id="contact-number"
-                className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div className="md:col-span-2">
-              <label
-                htmlFor="role"
-                className="block text-sm font-medium text-zinc-700"
-              >
-                Role
-              </label>
-              <input
-                type="text"
-                id="role"
+                id="contactNumber"
+                name="contactNumber"
                 className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -158,6 +165,7 @@ const RegisterPage = () => {
               </label>
               <textarea
                 id="address"
+                name="address"
                 className="mt-1 block w-full border border-zinc-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
               ></textarea>
             </div>
