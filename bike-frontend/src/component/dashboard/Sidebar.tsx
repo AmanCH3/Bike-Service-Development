@@ -20,7 +20,7 @@ const Sidebar = () => {
                 "flex items-center p-2 rounded size-10",
                 item.activeClass,
                 item.path == pathname &&
-                  "w-full bg-black text-white py-1.5 px-3 rounded-md"
+                  "w-full bg-stone-400 text-white py-1.5 px-3 rounded-md"
               )}
             >
               <img
