@@ -5,7 +5,7 @@ export interface GetAuthResponse {
   UserType: string;
 }
 
-export interface CreateDetailsRequestBody {
+export interface loginDetailsRequestBody {
   email: string;
   password: string;
 }

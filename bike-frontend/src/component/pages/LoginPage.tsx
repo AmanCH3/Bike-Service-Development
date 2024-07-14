@@ -1,51 +1,23 @@
 import React from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  CreateDetailsRequestBody,
-  ApiResponse,
-} from "../../services/auth.type";
-import { createDetails } from "../../services/auth.api";
+import { loginFn } from "../../services/auth.api";
+import { loginDetailsRequestBody } from "../../services/auth.type";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleLogin = async (
-    values: CreateDetailsRequestBody
-  ): Promise<ApiResponse> => {
+  const onSubmit = async (values: loginDetailsRequestBody) => {
+    console.log(values);
     try {
-      console.log("Sending login request with values:", values);
-      const response = await createDetails(values);
-      console.log("Received login response:", response);
-      return response;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error("Axios error during authentication:", error);
-        console.error("Error code:", error.code);
-        console.error("Error response data:", error.response?.data);
-        console.error("Error response status:", error.response?.status);
-        console.error("Error response headers:", error.response?.headers);
-      } else {
-        console.error("Unexpected error during authentication:", error);
-      }
-      throw new Error("Authentication failed");
-    }
-  };
-
-  const onSubmit = async (
-    values: CreateDetailsRequestBody,
-    { resetForm }: { resetForm: () => void }
-  ) => {
-    try {
-      const response = await handleLogin(values);
-      const { token, UserId, UserType } = response.data;
+      const response = await loginFn(values);
+      const { token, userId, userType } = response.data;
 
       localStorage.setItem("jwtToken", token); // Save JWT token
-      localStorage.setItem("roles", JSON.stringify(UserType)); // Save roles
-      localStorage.setItem("userID", UserId); // Save userID
+      localStorage.setItem("roles", JSON.stringify(userType)); // Save roles
+      localStorage.setItem("userID", userId); // Save userID
 
       // Role-based redirection
-      if (UserType.includes("ROLE_ADMIN") || UserType === "ADMIN") {
+      if (userType.includes("ROLE_ADMIN") || userType === "ADMIN") {
         navigate("/dashboard");
       } else {
         navigate("/user-dashboard");
@@ -54,18 +26,17 @@ const LoginPage: React.FC = () => {
       console.error("Login failed:", error);
       alert("Login failed. Please check your credentials and try again.");
     }
-    resetForm(); // Reset the form after submission
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const values: CreateDetailsRequestBody = {
+    const values: loginDetailsRequestBody = {
       email: (form.elements.namedItem("userEmail") as HTMLInputElement).value,
       password: (form.elements.namedItem("userPassword") as HTMLInputElement)
         .value,
     };
-    onSubmit(values, { resetForm: () => form.reset() });
+    onSubmit(values);
   };
 
   return (
