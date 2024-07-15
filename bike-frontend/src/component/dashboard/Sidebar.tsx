@@ -26,7 +26,7 @@ const Sidebar = () => {
               <img
                 alt={`${item.name}-icon`}
                 src={item.icon}
-                className="mr-2 size-7"
+                className="mr-6 size-7"
               />
               <Link to={item.path}>{item.name}</Link>
             </li>

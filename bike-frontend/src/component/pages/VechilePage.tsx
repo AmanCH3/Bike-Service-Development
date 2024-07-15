@@ -8,7 +8,7 @@ const Vehicle: React.FC = () => {
   const totalItems = 2128;
 
   const handleNextPage = () => {
-    if (currentPage * itemsPerPage < totalItems) {
+    if (currentPage * itemsPerPage < totalItems) {AddVehicleModal
       setCurrentPage(currentPage + 1);
     }
   };

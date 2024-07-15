@@ -9,6 +9,7 @@ import RegisterPage from "./component/pages/RegisterPage";
 import Vehicle from "./component/pages/VechilePage";
 import "./index.css";
 import Dashboard from "./component/pages/dashboard";
+import Service from "./component/pages/ServicePage";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "order",
         element: <Booking />,
+      },
+      {
+        path: "service",
+        element: <Service />,
       },
     ],
   },
