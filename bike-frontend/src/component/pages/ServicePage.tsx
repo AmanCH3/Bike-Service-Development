@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getService } from "../../services/service.api";
+import { getService, POST_URL_SERVICE } from "../../services/service.api";
 import { GetServiceResponse } from "../../services/service.type";
 
 import AddServiceModal from "../modal/add-service-modal";
+// Ensure correct import path
+import { useNavigate } from "react-router-dom";
 import ServiceTable from "../dashboard/Servicetable";
 
 const Service: React.FC = () => {
@@ -11,6 +13,40 @@ const Service: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const itemsPerPage = 50;
   const totalItems = 2128;
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const requestBody: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      requestBody[key] = value.toString();
+    });
+    const jsonBody = JSON.stringify(requestBody);
+    console.log(jsonBody);
+
+    try {
+      const response = await fetch(POST_URL_SERVICE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonBody,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add Service");
+      }
+
+      // Optionally refetch services after adding a new one
+      fetchServices();
+    } catch (error) {
+      console.error("Failed to add service:", error);
+      alert("Failed to add service. Please try again.");
+    }
+  };
 
   const handleNextPage = () => {
     if (currentPage * itemsPerPage < totalItems) {
@@ -32,12 +68,18 @@ const Service: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  useEffect(() => {
-    const fetchServices = async () => {
+  const fetchServices = async () => {
+    try {
       const data = await getService();
-      setServices(data);
-    };
+      console.log("data pf get", data);
+      //@ts-ignore
+      setServices(data.data);
+    } catch (error) {
+      console.error("Failed to fetch services:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchServices();
   }, []);
 
@@ -68,6 +110,7 @@ const Service: React.FC = () => {
         />
         <div className="flex space-x-2">
           <select className="bg-input text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
+            <option value="serviceId"> Service Id</option>
             <option value="serviceName">Service Name</option>
             <option value="cost">Cost</option>
             <option value="serviceDescription">Description</option>
@@ -103,9 +146,7 @@ const Service: React.FC = () => {
           </button>
         </div>
       </div>
-      {isModalOpen && (
-        <AddServiceModal openAddPopup={closeModal} /> // Render modal if isModalOpen is true
-      )}
+      {isModalOpen && <AddServiceModal openAddPopup={closeModal} />}
     </div>
   );
 };

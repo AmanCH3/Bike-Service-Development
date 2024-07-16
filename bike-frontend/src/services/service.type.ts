@@ -1,6 +1,7 @@
 export interface GetServiceResponse {
+  serviceId: number;
   serviceName: String;
-  serviceDescription: String;
+  description: String;
   cost: number;
 }
 
