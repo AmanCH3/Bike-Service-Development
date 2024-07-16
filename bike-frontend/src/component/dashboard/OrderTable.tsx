@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { getOrders } from "../../services/orders.api";
-import { Order } from "../../utils/constants";
 import DeleteOrderModal from "../modal/delete-order-modal";
 import UpdateOrderModal from "../modal/update-order-modal";
+import { GetOrdersResponse } from "../../services/orders.type";
 
 const OrderTable: React.FC = () => {
-  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [selectedOrder, setSelectedOrder] = useState<GetOrdersResponse | null>(
+    null
+  );
   const [isUpdatePopupOpen, setIsUpdatePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
 
@@ -20,12 +22,12 @@ const OrderTable: React.FC = () => {
     queryFn: getOrders,
   });
 
-  const handleUpdate = (order: Order) => {
+  const handleUpdate = (order: GetOrdersResponse) => {
     setSelectedOrder(order);
     setIsUpdatePopupOpen(true);
   };
 
-  const handleDelete = (order: Order) => {
+  const handleDelete = (order: GetOrdersResponse) => {
     setSelectedOrder(order);
     setIsDeletePopupOpen(true);
   };
@@ -67,12 +69,13 @@ const OrderTable: React.FC = () => {
         </thead>
         <tbody>
           {fetchedOrders?.map((order) => (
-            <tr key={order.id} className="border-b border-border">
-              <td className="py-2">{order.id}</td>
+            <tr key={order.customerId} className="border-b border-border">
+              <td className="py-2">{order.customerId}</td>
+              <td className="py-2">{order.serviceId}</td>
               <td className="py-2">{order.date}</td>
-              <td className="py-2">{order.customer}</td>
-              <td className="py-2">{order.amount}</td>
-              <td className="py-2 text-green-500">{order.payment}</td>
+              <td className="py-2">{order.paymentFirst}</td>
+              <td className="py-2 text-green-500">{order.paymentType}</td>
+
               <td
                 className={`py-2 ${
                   order.status === "Processing"

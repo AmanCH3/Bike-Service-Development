@@ -1,13 +1,15 @@
 export interface GetOrdersResponse {
-  id: string;
+  appointmentId: number;
+  serviceId: number;
+  customerId: number;
   date: string;
-  customer: string;
-  amount: string;
-  payment: string;
   status: string;
+  paymentFirst: number;
+  paymentType: string;
 }
 
 export interface CreateOrderRequestBody {
+  appointmentId: number;
   serviceId: number;
   customerId: number;
   date: string;

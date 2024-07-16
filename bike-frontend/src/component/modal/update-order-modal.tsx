@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Order } from "../../utils/constants";
+import { GetOrdersResponse } from "../../services/orders.type";
 
 interface UpdateOrderModalProps {
-  selectedOrder: Order;
+  selectedOrder: GetOrdersResponse;
   closeUpdatePopup: () => void;
 }
 
@@ -10,19 +11,19 @@ const UpdateOrderModal: React.FC<UpdateOrderModalProps> = ({
   selectedOrder,
   closeUpdatePopup,
 }) => {
-  const [id, setId] = useState<string>(selectedOrder.id);
-  const [date, setDate] = useState<string>(selectedOrder.date);
-  const [customer, setCustomer] = useState<string>(selectedOrder.customer);
-  const [payment, setPayment] = useState<string>(selectedOrder.payment);
-  const [amount, setAmount] = useState<string>(selectedOrder.amount);
+  const [id, setId] = useState<number>(selectedOrder.customerId);
+  const [date, setDate] = useState<number>(selectedOrder.serviceId);
+  const [customer, setCustomer] = useState<string>(selectedOrder.date);
+  const [payment, setPayment] = useState<number>(selectedOrder.paymentFirst);
+  const [amount, setAmount] = useState<string>(selectedOrder.paymentType);
   const [status, setStatus] = useState<string>(selectedOrder.status);
 
   useEffect(() => {
-    setId(selectedOrder.id);
-    setDate(selectedOrder.date);
-    setCustomer(selectedOrder.customer);
-    setPayment(selectedOrder.payment);
-    setAmount(selectedOrder.amount);
+    setId(selectedOrder.customerId);
+    setDate(selectedOrder.serviceId);
+    setCustomer(selectedOrder.date);
+    setPayment(selectedOrder.paymentFirst);
+    setAmount(selectedOrder.paymentType);
     setStatus(selectedOrder.status);
   }, [selectedOrder]);
 
@@ -52,7 +53,7 @@ const UpdateOrderModal: React.FC<UpdateOrderModalProps> = ({
               id="id"
               name="id"
               value={id}
-              onChange={(e) => setId(e.target.value)}
+              onChange={(e) => setId(Number(e.target.value))}
               className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
               required
             />
@@ -85,7 +86,7 @@ const UpdateOrderModal: React.FC<UpdateOrderModalProps> = ({
               id="date"
               name="date"
               value={date}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={(e) => setDate(Number(e.target.value))}
               className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
             />
           </div>
@@ -101,7 +102,7 @@ const UpdateOrderModal: React.FC<UpdateOrderModalProps> = ({
               id="payment"
               name="payment"
               value={payment}
-              onChange={(e) => setPayment(e.target.value)}
+              onChange={(e) => setPayment(Number(e.target.value))}
               className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
             />
           </div>
