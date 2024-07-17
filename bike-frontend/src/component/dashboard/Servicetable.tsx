@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { GetServiceResponse } from "../../services/service.type";
 import UpdateServiceModal from "../modal/update-service-modal";
+import { BASE_URL_SERVICE } from "../../services/service.api";
 
 interface ServiceTableProps {
   services: GetServiceResponse[];
+  setServices: React.Dispatch<React.SetStateAction<GetServiceResponse[]>>;
 }
 
-const ServiceTable: React.FC<ServiceTableProps> = ({ services }) => {
+const ServiceTable: React.FC<ServiceTableProps> = ({
+  services,
+  setServices,
+}) => {
   const [selectedService, setSelectedService] =
     useState<GetServiceResponse | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,16 +25,43 @@ const ServiceTable: React.FC<ServiceTableProps> = ({ services }) => {
     setSelectedService(null);
     setIsModalOpen(false);
   };
-  const updateService = (updatedServiceData: {
+  const updateService = async (updatedServiceData: {
     serviceId: number;
     serviceName: String;
     serviceDescription: String;
     cost: number;
   }) => {
-    // Implement your update logic here
-    // This could be an API call or state update
     console.log("Updating service:", updatedServiceData);
-    // After successful update, you might want to refresh your services list
+    try {
+      const response = await fetch(
+        `${BASE_URL_SERVICE}/${updatedServiceData.serviceId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedServiceData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const updatedService = await response.json();
+
+      // Update the local state with the new data
+      setServices((prevServices) =>
+        prevServices.map((service) =>
+          service.serviceId === updatedService.serviceId
+            ? updatedService
+            : service
+        )
+      );
+    } catch (error) {
+      console.error("Error updating service:", error);
+      // Handle error (e.g., show error message to user)
+    }
   };
 
   return (
