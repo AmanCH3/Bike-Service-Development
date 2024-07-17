@@ -146,7 +146,12 @@ const Service: React.FC = () => {
           </button>
         </div>
       </div>
-      {isModalOpen && <AddServiceModal openAddPopup={closeModal} />}
+      {isModalOpen && (
+        <AddServiceModal
+          openAddPopup={closeModal}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 };
