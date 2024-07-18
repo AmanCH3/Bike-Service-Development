@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AddVehicleModal from "../modal/add-vechile-modal";
-import { getVechile } from "../../services/vechile.api";
+import { getVechile, POST_BIKE_URL } from "../../services/vechile.api";
 import { getVechileResponse } from "../../services/vechile.type";
+import VehicleTable from "../dashboard/VechileTable";
 
 const Vehicle: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -9,6 +10,38 @@ const Vehicle: React.FC = () => {
   const [vechiles, setVechiles] = useState<getVechileResponse[]>([]);
   const itemsPerPage = 50;
   const totalItems = 2128; // Example total items, should ideally be dynamic
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const requestBody: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      requestBody[key] = value.toString();
+    });
+    const jsonBody = JSON.stringify(requestBody);
+    console.log(jsonBody);
+
+    try {
+      const response = await fetch(POST_BIKE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonBody,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add Bike");
+      }
+
+      fetchVechiles();
+    } catch (error) {
+      console.error("Failed to add Vechile:", error);
+      alert("Failed to add Vechile. Please try again.");
+    }
+  };
 
   const handleNextPage = () => {
     if (currentPage * itemsPerPage < totalItems) {
@@ -34,7 +67,7 @@ const Vehicle: React.FC = () => {
     try {
       const data = await getVechile();
       //@ts-ignore
-      setVechiles(data.data); // Update to match the correct data structure
+      setVechiles(data.data);
     } catch (error) {
       console.error("Failed to fetch vechiles:", error);
     }
@@ -81,37 +114,7 @@ const Vehicle: React.FC = () => {
           <option value="registrationNumber">Registration Number</option>
         </select>
       </div>
-      <div className="bg-card p-4 rounded-lg shadow w-full">
-        <table className="min-w-full bg-white border border-border">
-          <thead>
-            <tr className="border-b">
-              <th className="px-4 py-2 text-left">Bike ID</th>
-              <th className="px-4 py-2 text-left">Brand</th>
-              <th className="px-4 py-2 text-left">Model</th>
-              <th className="px-4 py-2 text-left">Registration Number</th>
-              <th className="px-4 py-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vechiles.map((vechile) => (
-              <tr key={vechile.bikeId} className="border-b hover:bg-input/20">
-                <td className="px-4 py-2">
-                  <input type="checkbox" className="mr-2" />
-                  {vechile.bikeId}
-                </td>
-                <td className="px-4 py-2">{vechile.brand}</td>
-                <td className="px-4 py-2">{vechile.modal}</td>
-                <td className="px-4 py-2">{vechile.registrationNumber}</td>
-                <td className="px-4 py-2">
-                  <button className="bg-secondary text-secondary-foreground px-2 py-1 rounded-lg hover:bg-secondary/80">
-                    ...
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <VehicleTable vehicles={vechiles} setVechile={setVechiles} />
       <div className="mt-4 text-foreground">
         Showing {Math.min(itemsPerPage * currentPage, totalItems)} of{" "}
         {totalItems}
@@ -132,7 +135,9 @@ const Vehicle: React.FC = () => {
           Next
         </button>
       </div>
-      {isModalOpen && <AddVehicleModal openAddPopup={closeModal} />}
+      {isModalOpen && (
+        <AddVehicleModal openAddPopup={openModal} handleSubmit={handleSubmit} />
+      )}
     </div>
   );
 };

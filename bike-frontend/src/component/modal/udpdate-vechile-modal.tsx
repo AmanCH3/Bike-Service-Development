@@ -1,72 +1,85 @@
 import React, { useState } from "react";
-interface AddVehicleModalProps {
-  openAddPopup: () => void;
-  handleSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
-    vechileData: {
-      customerID: number;
-      brand: String;
-      modal: String;
-      registrationNumber: String;
-    }
-  ) => void;
+
+interface UpdateVechileModalProps {
+  openUpdatePopup: () => void;
+
+  initialData: {
+    bikeID: number;
+    brand: String;
+    modal: String;
+    registrationNumber: String;
+  };
+  updateVechile: (updatedVechileData: {
+    bikeId: number;
+    brand: String;
+    modal: String;
+    registrationNumber: String;
+  }) => void;
 }
 
-const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
-  openAddPopup,
-  handleSubmit,
+const UpdateVechileModal: React.FC<UpdateVechileModalProps> = ({
+  openUpdatePopup,
+  initialData,
+  updateVechile,
 }) => {
-  const [customerID, setCustomerId] = useState<number>(0);
-  const [brand, setBrand] = useState<String>("");
-  const [modal, setModel] = useState<String>("");
-  const [registrationNumber, setRegistrationNumber] = useState<String>("");
+  const [bikeId, setBikeId] = useState<number>(initialData.bikeID);
+  const [brand, setBrand] = useState(initialData.brand);
+  const [modal, setModal] = useState(initialData.modal);
+  const [registrationNumber, setRegistrationNumber] = useState<String>(
+    initialData.registrationNumber
+  );
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle the form submission logic here
-    console.log({ customerID, brand, modal, registrationNumber });
-    handleSubmit(e, { customerID, brand, modal, registrationNumber });
+
+    // Call updateService with updated data
+    updateVechile({ bikeId, brand, modal, registrationNumber });
+
+    // Optionally, you may want to close the modal or handle UI feedback here
+    // For simplicity, assuming closing modal after submission
+    openUpdatePopup();
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="p-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-bold">Add Vehicle</h1>
-          <button onClick={openAddPopup} className="text-xl font-bold">
-            &times; X
+          <h1 className="text-xl font-bold">Update Service</h1>
+          <button onClick={openUpdatePopup} className="text-xl font-bold">
+            X
           </button>
         </div>
         <div className="bg-card p-6 rounded-lg shadow-md">
           <form onSubmit={onSubmit}>
             <div className="mb-4">
               <label
-                htmlFor="customerId"
+                htmlFor="bike Id"
                 className="block text-sm font-medium text-muted-foreground"
               >
-                Customer ID *
+                Bike ID *
               </label>
               <input
                 type="number"
-                id="customerId"
-                name="customerId"
-                value={customerID}
-                onChange={(e) => setCustomerId(Number(e.target.value))}
+                id="BikeID"
+                name="BiekID"
+                value={bikeId}
+                onChange={(e) => setBikeId(Number(e.target.value))}
                 className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
                 required
               />
             </div>
+
             <div className="mb-4">
               <label
-                htmlFor="brand"
+                htmlFor="serviceName"
                 className="block text-sm font-medium text-muted-foreground"
               >
                 Brand *
               </label>
               <input
                 type="text"
-                id="brand"
-                name="brand"
+                id="Brand"
+                name="Brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
                 className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
@@ -75,32 +88,32 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
             </div>
             <div className="mb-4">
               <label
-                htmlFor="model"
+                htmlFor="serviceDescription"
                 className="block text-sm font-medium text-muted-foreground"
               >
-                Model *
+                Modal *
               </label>
               <input
                 type="text"
-                id="model"
-                name="model"
+                id="Modal"
+                name="Modal"
                 value={modal}
-                onChange={(e) => setModel(e.target.value)}
+                onChange={(e) => setModal(e.target.value)}
                 className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
                 required
               />
             </div>
             <div className="mb-4">
               <label
-                htmlFor="registrationNumber"
+                htmlFor="cost"
                 className="block text-sm font-medium text-muted-foreground"
               >
-                Registration Number *
+                Registration number *
               </label>
               <input
-                type="text"
-                id="registrationNumber"
-                name="registrationNumber"
+                type="number"
+                id="cost"
+                name="cost"
                 value={registrationNumber}
                 onChange={(e) => setRegistrationNumber(e.target.value)}
                 className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
@@ -112,7 +125,7 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
                 type="submit"
                 className="bg-primary text-primary-foreground hover:bg-primary/80 px-4 py-2 rounded-md"
               >
-                Add Vehicle
+                Update Vechile
               </button>
             </div>
           </form>
@@ -122,4 +135,4 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
   );
 };
 
-export default AddVehicleModal;
+export default UpdateVechileModal;
