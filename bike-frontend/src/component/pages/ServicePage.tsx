@@ -76,60 +76,7 @@ const Service: React.FC = () => {
       console.error("Failed to fetch services:", error);
     }
   };
-  // Assuming services and setServices are defined in the scope or received as props
-
-  // // ===================update PUT API===================
-  // const uploadService = (
-  //   serviceId: number,
-  //   serviceName: string,
-  //   serviceDescription: string,
-  //   cost: number
-  // ) => {
-  //   // Find the service object to update
-  //   const serviceToUpdate = services.find(
-  //     (service) => service.serviceId === serviceId
-  //   );
-
-  //   // If serviceToUpdate is not found, handle error or return
-  //   if (!serviceToUpdate) {
-  //     console.error(`Service with ID ${serviceId} not found.`);
-  //     return;
-  //   }
-
-  //   // Prepare updated service object
-  //   const updatedService = {
-  //     ...serviceToUpdate,
-  //     serviceName,
-  //     serviceDescription,
-  //     cost,
-  //   };
-
-  //   // Perform PUT request to update service
-  //   fetch(`BASE_API_URL/${serviceId}`, {
-  //     method: "PUT",
-  //     body: JSON.stringify(updatedService),
-  //     headers: {
-  //       "Content-type": "application/json; charset=UTF-8",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // Update local state or trigger refresh after successful update
-  //       setServices((prevServices) =>
-  //         prevServices.map((service) =>
-  //           service.serviceId === serviceId ? updatedService : service
-  //         )
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error updating service:", error);
-  //     });
-  // };
+ 
   useEffect(() => {
     fetchServices();
   }, []);

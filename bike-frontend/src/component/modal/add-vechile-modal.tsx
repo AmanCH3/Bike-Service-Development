@@ -34,7 +34,7 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">Add Vehicle</h1>
           <button onClick={openAddPopup} className="text-xl font-bold">
-            &times; X
+            X
           </button>
         </div>
         <div className="bg-card p-6 rounded-lg shadow-md">

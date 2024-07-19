@@ -61,51 +61,68 @@ const VehicleTable: React.FC<VehicleTableProps> = ({
   };
 
   return (
-    <div className="bg-card p-4 rounded-lg shadow w-full">
-      <table className="w-full text-left">
-        <thead className="bg-muted text-muted-foreground">
-          <tr className="border-b">
-            <th className="px-4 py-2 text-left">Bike ID</th>
-            <th className="px-4 py-2 text-left">Brand</th>
-            <th className="px-4 py-2 text-left">Modal</th>
-            <th className="px-4 py-2 text-left">Registration Number</th>
-            <th className="px-4 py-2 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {vehicles.map((vehicle) => (
-            <tr key={vehicle.bikeId} className="border-b border-border">
-              <td className="px-4 py-2">{vehicle.brand}</td>
-              <td className="px-4 py-2">{vehicle.modal}</td>
-              <td className="px-4 py-2">{vehicle.registrationNumber}</td>
-              <td className="px-4 py-2">
-                <button
-                  className="bg-secondary text-secondary-foreground px-2 py-1 rounded-lg hover:bg-secondary/80"
-                  onClick={() => openUpdateModal(vehicle)}
-                >
-                  Update
-                </button>
+    <div className="container px-4 mx-auto">
+      <div className="flex flex-col">
+        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 bg-cyan-500">
+                  <tr className="border-b">
+                    <th className="px-4 py-2 text-left">Bike ID</th>
+                    <th className="px-4 py-2 text-left">Brand</th>
+                    <th className="px-4 py-2 text-left">Model</th>
+                    <th className="px-4 py-2 text-left">Registration Number</th>
+                    <th className="px-4 py-2 text-left">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 bg-gray-400">
+                  {vehicles.map((vehicle) => (
+                    <tr key={vehicle.bikeId} className="border-b border-border">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                        {vehicle.bikeId}
+                      </td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                        {vehicle.brand}
+                      </td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                        {vehicle.modal}
+                      </td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                        {vehicle.registrationNumber}
+                      </td>
+                      <td className="px-4 py-2 text-sm whitespace-nowrap">
+                        <button
+                          className="bg-secondary text-secondary-foreground px-2 py-1 rounded-lg hover:bg-secondary/80 to-gray-400"
+                          onClick={() => openUpdateModal(vehicle)}
+                        >
+                          Update
+                        </button>
 
-                <button className="text-destructive hover:text-destructive/80 bg-transparent text-red-700 mx-5">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {isModalOpen && selectedVechile && (
-        <UpdateVechileModal
-          openUpdatePopup={closeUpdateModal}
-          initialData={{
-            bikeID: selectedVechile.bikeId,
-            brand: selectedVechile.brand,
-            modal: selectedVechile.modal,
-            registrationNumber: selectedVechile.registrationNumber,
-          }}
-          updateVechile={updateVehicle}
-        />
-      )}
+                        <button className="text-destructive hover:text-destructive/80 bg-transparent text-red-700 mx-5">
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {isModalOpen && selectedVechile && (
+                <UpdateVechileModal
+                  openUpdatePopup={closeUpdateModal}
+                  initialData={{
+                    bikeID: selectedVechile.bikeId,
+                    brand: selectedVechile.brand,
+                    modal: selectedVechile.modal,
+                    registrationNumber: selectedVechile.registrationNumber,
+                  }}
+                  updateVechile={updateVehicle}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

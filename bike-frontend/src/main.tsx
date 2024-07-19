@@ -6,10 +6,10 @@ import App from "./App";
 import Booking from "./component/pages/booking";
 import LoginPage from "./component/pages/LoginPage";
 import RegisterPage from "./component/pages/RegisterPage";
-import Vehicle from "./component/pages/VechilePage";
 import "./index.css";
 import Dashboard from "./component/pages/dashboard";
 import Service from "./component/pages/ServicePage";
+import Vehicles from "./component/pages/VechilePage";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "vehicle",
-        element: <Vehicle />,
+        element: <Vehicles />,
       },
       {
         path: "order",
