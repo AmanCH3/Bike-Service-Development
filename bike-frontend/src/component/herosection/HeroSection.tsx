@@ -2,6 +2,8 @@ import React from "react";
 import center from "../../assets/center.png";
 import left from "../../assets/left.png";
 import right from "../../assets/right.png";
+import "../../css/image-scroller.css";
+
 const HeroSection: React.FC = () => {
   const hover = "hover:scale-110 transition-transform duration-500 ease-in-out";
   return (
@@ -13,7 +15,23 @@ const HeroSection: React.FC = () => {
         Service at your home or office, 7 days a week, <br /> fair and
         transparent pricing
       </p>
-      <div className="flex  justify-between items-center  m-20  ">
+
+      <div id="carousel-wrapper">
+        <input type="radio" name="position" checked />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <main id="carousel">
+          <div className="item"></div>
+          <div className="item"></div>
+          <div className="item"></div>
+          <div className="item"></div>
+          <div className="item"></div>
+        </main>
+      </div>
+
+      {/* <div className="flex  justify-between items-center  m-20  ">
         <img
           src={right}
           alt="Mechanic with tools"
@@ -30,7 +48,7 @@ const HeroSection: React.FC = () => {
           alt="Close-up of bike repair"
           className="hover:scale-110 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
         />
-      </div>
+      </div> */}
     </section>
   );
 };

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Order } from "../../utils/constants";
+import React, { useEffect, useState } from "react";
 import { GetOrdersResponse } from "../../services/orders.type";
 
 interface UpdateOrderModalProps {

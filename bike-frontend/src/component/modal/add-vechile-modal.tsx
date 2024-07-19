@@ -6,7 +6,7 @@ interface AddVehicleModalProps {
     vechileData: {
       customerID: number;
       brand: String;
-      modal: String;
+      model: String;
       registrationNumber: String;
     }
   ) => void;
@@ -18,14 +18,14 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
 }) => {
   const [customerID, setCustomerId] = useState<number>(0);
   const [brand, setBrand] = useState<String>("");
-  const [modal, setModel] = useState<String>("");
+  const [model, setModel] = useState<String>("");
   const [registrationNumber, setRegistrationNumber] = useState<String>("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle the form submission logic here
-    console.log({ customerID, brand, modal, registrationNumber });
-    handleSubmit(e, { customerID, brand, modal, registrationNumber });
+    console.log({ customerID, brand, model, registrationNumber });
+    handleSubmit(e, { customerID, brand, model, registrationNumber });
   };
 
   return (
@@ -84,7 +84,7 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
                 type="text"
                 id="model"
                 name="model"
-                value={modal}
+                value={model}
                 onChange={(e) => setModel(e.target.value)}
                 className="mt-1 block w-full rounded-md border border-input bg-background p-2 text-foreground"
                 required

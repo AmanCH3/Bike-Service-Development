@@ -1,4 +1,4 @@
-import OrderTable from "../dashboard/OrderTable";
+import OrderTable from "../component/dashboard/OrderTable";
 
 const Booking = () => {
   return (

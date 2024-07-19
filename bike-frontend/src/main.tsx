@@ -3,13 +3,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import Booking from "./component/pages/booking";
-import LoginPage from "./component/pages/LoginPage";
-import RegisterPage from "./component/pages/RegisterPage";
+import Booking from "./pages/booking";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import "./index.css";
-import Dashboard from "./component/pages/dashboard";
-import Service from "./component/pages/ServicePage";
-import Vehicles from "./component/pages/VechilePage";
+import Service from "./pages/ServicePage";
+import Vehicles from "./pages/VechilePage";
+import FormsPage from "./pages/setting";
+import RootLayout from "./pages/layout";
+import Dashboard from "./pages/dashboard";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <RootLayout />,
     children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
       {
         path: "vehicle",
         element: <Vehicles />,
@@ -31,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "service",
         element: <Service />,
+      },
+      {
+        path: "setting",
+        element: <FormsPage />,
       },
     ],
   },

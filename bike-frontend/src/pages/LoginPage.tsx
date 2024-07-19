@@ -1,18 +1,17 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginFn } from "../../services/auth.api";
-import { loginDetailsRequestBody } from "../../services/auth.type";
+import { loginFn } from "../services/auth.api";
+import { loginDetailsRequestBody } from "../services/auth.type";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (values: loginDetailsRequestBody) => {
-    console.log(values);
     try {
       const response = await loginFn(values);
       const { token, userId, userType } = response.data;
 
-      localStorage.setItem("jwtToken", token); // Save JWT token
+      localStorage.setItem("session", token); // Save JWT token
       localStorage.setItem("roles", JSON.stringify(userType)); // Save roles
       localStorage.setItem("userID", userId); // Save userID
 

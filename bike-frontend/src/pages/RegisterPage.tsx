@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
-import { BASE_API_URL } from "../../utils/api.constants";
+import logo from "../assets/logo.png";
+import { BASE_API_URL } from "../utils/api.constants";
 
 const RegisterPage = () => {
   const navigate = useNavigate();

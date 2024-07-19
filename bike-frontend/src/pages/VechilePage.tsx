@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AddVehicleModal from "../modal/add-vechile-modal";
-import { getVechile, POST_BIKE_URL } from "../../services/vechile.api";
-import { getVechileResponse } from "../../services/vechile.type";
-import VehicleTable from "../dashboard/VechileTable";
+import AddVehicleModal from "../component/modal/add-vechile-modal";
+import { getVechile, POST_BIKE_URL } from "../services/vechile.api";
+import { getVechileResponse } from "../services/vechile.type";
+import VehicleTable from "../component/dashboard/VechileTable";
 
 const Vehicle: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

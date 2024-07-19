@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getService, POST_URL_SERVICE } from "../../services/service.api";
-import { GetServiceResponse } from "../../services/service.type";
-import AddServiceModal from "../modal/add-service-modal";
+import { getService, POST_URL_SERVICE } from "../services/service.api";
+import { GetServiceResponse } from "../services/service.type";
+import AddServiceModal from "../component/modal/add-service-modal";
 // Ensure correct import path
 import { useNavigate } from "react-router-dom";
-import ServiceTable from "../dashboard/Servicetable";
+import ServiceTable from "../component/dashboard/Servicetable";
 const Service: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [services, setServices] = useState<GetServiceResponse[]>([]);
@@ -76,7 +76,7 @@ const Service: React.FC = () => {
       console.error("Failed to fetch services:", error);
     }
   };
- 
+
   useEffect(() => {
     fetchServices();
   }, []);

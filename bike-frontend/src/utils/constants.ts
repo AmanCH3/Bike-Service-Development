@@ -123,6 +123,12 @@ export const navItems = [
     activeClass: "text-muted-foreground hover:bg-muted",
   },
   {
+    name: "Setting",
+    path: "/dashboard/setting",
+    icon: "https://as1.ftcdn.net/v2/jpg/01/85/89/04/1000_F_185890463_CWEQL0eZnPvjJhLxOk9B57qh4sk3bnrd.jpg",
+    activeClass: "text-muted-foreground hover:bg-muted blue",
+  },
+  {
     name: "Log out",
     path: "/dashboard/logout",
     icon: "https://cdn0.iconfinder.com/data/icons/glyph-2-ui-part-1-of-4/100/pack02-05-512.png",
