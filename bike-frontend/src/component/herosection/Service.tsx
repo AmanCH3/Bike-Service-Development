@@ -30,25 +30,30 @@ const services = [
 
 const Services: React.FC = () => {
   return (
-    <section className="p-10 bg-white">
+    <section id="contact" className="p-10 bg-white">
       <h2 className="text-5xl font-bold text-center mb-6">Our Services</h2>
-      <div className="w-full h-full flex flex-wrap justify-around ">
+      <div
+        className="w-full h-full flex flex-wrap justify-center  "
+        style={{ gap: "3rem" }}
+      >
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center gap-3 mr hover:scale-110 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
-            style={{ width: "356px", height: "437px" }}
+            className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center gap-3 mr hover:scale-105 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
+            style={{ width: "356px", height: "auto" }}
           >
             <img
-              className="mb-4"
+              className="mb-4 size-10 "
               src={service.icon}
               alt={`${service.title} icon`}
             />
-            <h3 className="text-xl font-bold text-center mb-2">
+            <h3 className="text-xl font-bold text-center mb-2 ">
               {service.title}
             </h3>
-            <p className="mb-4 text-center">{service.description}</p>
-            <button className="text-blue-800 font-bold py-2 px-4 rounded shadow-lg">
+            <p className="mb-4 text-sm text-center leading-7 tracking-wider font-family-cambay">
+              {service.description}
+            </p>
+            <button className="text-blue-800  font-bold py-2 px-4  ">
               {service.button}
             </button>
           </div>

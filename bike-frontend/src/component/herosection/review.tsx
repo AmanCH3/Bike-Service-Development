@@ -50,33 +50,37 @@ const renderStars = (rating: any) => {
 
 const ReviewsSection: React.FC = () => {
   return (
-    <div className="bg-white p-10">
-      <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold">Reviews:</h2>
-        <div className="flex justify-center text-2xl mt-2">
-          {renderStars(4.5)}
+    <section id="reviews">
+      <div data-aos="fade-up">
+        <div className="bg-white p-10">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold">Reviews:</h2>
+            <div className="flex justify-center text-2xl mt-2">
+              {renderStars(4.5)}
+            </div>
+          </div>
+          <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto items-center  ">
+            {reviews.map((review, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center  hover:scale-110 transition-transform duration-500 ease-in-out"
+              >
+                <img
+                  src={review.image}
+                  alt={review.name}
+                  className="w-16 h-16 rounded-full mb-4 "
+                />
+                <h3 className="text-xl font-bold mb-2">{review.name}</h3>
+                <div className="flex justify-center mb-2">
+                  {renderStars(review.rating)}
+                </div>
+                <p className="text-gray-700">{review.review}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto items-center">
-        {reviews.map((review, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center"
-          >
-            <img
-              src={review.image}
-              alt={review.name}
-              className="w-16 h-16 rounded-full mb-4"
-            />
-            <h3 className="text-xl font-bold mb-2">{review.name}</h3>
-            <div className="flex justify-center mb-2">
-              {renderStars(review.rating)}
-            </div>
-            <p className="text-gray-700">{review.review}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    </section>
   );
 };
 

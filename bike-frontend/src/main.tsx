@@ -12,7 +12,6 @@ import Vehicles from "./pages/VechilePage";
 import FormsPage from "./pages/setting";
 import RootLayout from "./pages/layout";
 import Dashboard from "./pages/dashboard";
-
 const router = createBrowserRouter([
   {
     path: "/",
