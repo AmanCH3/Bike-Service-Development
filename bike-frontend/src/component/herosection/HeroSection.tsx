@@ -1,55 +1,31 @@
 import React from "react";
-import center from "../../assets/center.png";
-import left from "../../assets/left.png";
-import right from "../../assets/right.png";
+import dropped from "../../assets/dropped.png";
 import "../../css/image-scroller.css";
 
 const HeroSection: React.FC = () => {
   const hover = "hover:scale-110 transition-transform duration-500 ease-in-out";
   return (
-    <section className="text-center">
-      <h1 className="text-[60px] font-bold mb-4  leading-[50px] ">
-        Door Step <br className="mb-6" /> Two Wheeler Servicing
-      </h1>
-      <p className="text-lg text-service mb-2 ">
-        Service at your home or office, 7 days a week, <br /> fair and
-        transparent pricing
-      </p>
-
-      <div id="carousel-wrapper">
-        <input type="radio" name="position" checked />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <main id="carousel">
-          <div className="item"></div>
-          <div className="item"></div>
-          <div className="item"></div>
-          <div className="item"></div>
-          <div className="item"></div>
-        </main>
+    <div className="flex flex-col md:flex-row justify-center bg-white  items-center ">
+      <div className="text-center items-center m-10 p-10 flex-1 py-20">
+        <h1 className="text-4xl md:text-[60px] font-bold mb-4  ">
+          Door Step <br className="hidden md:block mb-6" /> Two Wheeler
+          Servicing
+        </h1>
+        <p className="text-lg text-service mb-2 py-4">
+          Service at your home or office, 7 days a week,{" "}
+          <br className="hidden md:block" />
+          fair and transparent pricing
+        </p>
       </div>
 
-      {/* <div className="flex  justify-between items-center  m-20  ">
+      <div className="flex justify-center items-center flex-1">
         <img
-          src={right}
+          src={dropped}
           alt="Mechanic with tools"
-          className="mr hover:scale-110 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
+          className={`${hover}  w-[200] h-[200] md:w-[300] md:h-[300]`}
         />
-        <img
-          src={center}
-          alt="Mechanic working on bike"
-          className="size-200  w-[200] h-[200] md:w-[300] md:20 hover:scale-110
-           transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300] "
-        />
-        <img
-          src={left}
-          alt="Close-up of bike repair"
-          className="hover:scale-110 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
-        />
-      </div> */}
-    </section>
+      </div>
+    </div>
   );
 };
 
