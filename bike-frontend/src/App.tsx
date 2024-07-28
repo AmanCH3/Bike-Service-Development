@@ -1,4 +1,5 @@
 // import BookingSection from "./component/bookingsection/BookingComponent";
+import Footer from "./component/herosection/Footer";
 import HeroSection from "./component/herosection/HeroSection";
 import ReviewsSection from "./component/herosection/review";
 // import SechulingCalander from "./component/herosection/SechulingCalander";
@@ -16,6 +17,7 @@ function App() {
       <Services />
       <WarrantySection />
       <ReviewsSection />
+      <Footer />
     </div>
   );
 }

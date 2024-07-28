@@ -57,7 +57,7 @@ const ReviewsSection: React.FC = () => {
           {renderStars(4.5)}
         </div>
       </div>
-      <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+      <div className="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto items-center">
         {reviews.map((review, index) => (
           <div
             key={index}
