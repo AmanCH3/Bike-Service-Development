@@ -3,6 +3,8 @@ import React from "react";
 import Vector from "../../assets/Vector.png";
 import ve from "../../assets/ve.png";
 import vee from "../../assets/vee.png";
+import { Navigate, useNavigate } from "react-router-dom";
+import NavBar from "../navbar/NavBar";
 
 const services = [
   {
@@ -29,6 +31,10 @@ const services = [
 ];
 
 const Services: React.FC = () => {
+  const navigate = useNavigate();
+  const handleBook = () => {
+    navigate("/book");
+  };
   return (
     <section id="contact" className="p-10 bg-white">
       <h2 className="text-5xl font-bold text-center mb-6">Our Services</h2>
@@ -53,7 +59,14 @@ const Services: React.FC = () => {
             <p className="mb-4 text-sm text-center leading-7 tracking-wider font-family-cambay">
               {service.description}
             </p>
-            <button className="text-blue-800  font-bold py-2 px-4  ">
+            <button
+              className="text-blue-800  font-bold py-2 px-4  "
+              onClick={
+                service.title === "Two Wheeler Servicing"
+                  ? handleBook
+                  : undefined
+              }
+            >
               {service.button}
             </button>
           </div>

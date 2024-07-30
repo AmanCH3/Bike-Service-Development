@@ -5,9 +5,9 @@ interface AddVehicleModalProps {
     e: React.FormEvent<HTMLFormElement>,
     vechileData: {
       customerID: number;
-      brand: String;
-      model: String;
-      registrationNumber: String;
+      brand: string;
+      model: string;
+      registrationNumber: string;
     }
   ) => void;
 }
@@ -17,9 +17,9 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
   handleSubmit,
 }) => {
   const [customerID, setCustomerId] = useState<number>(0);
-  const [brand, setBrand] = useState<String>("");
-  const [model, setModel] = useState<String>("");
-  const [registrationNumber, setRegistrationNumber] = useState<String>("");
+  const [brand, setBrand] = useState<string>("");
+  const [model, setModel] = useState<string>("");
+  const [registrationNumber, setRegistrationNumber] = useState<string>("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

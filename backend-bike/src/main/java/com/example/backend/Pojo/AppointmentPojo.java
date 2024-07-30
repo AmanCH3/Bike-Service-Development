@@ -12,7 +12,7 @@ import lombok.Setter;
 public class AppointmentPojo {
     private int appointmentId;
     private int serviceId ;
-    private int customeId;
+    private Long customerId;
     private String date ;
     private String status ;
     private Double paymentFirst ;

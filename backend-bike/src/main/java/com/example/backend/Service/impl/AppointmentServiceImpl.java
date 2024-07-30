@@ -25,7 +25,7 @@ public class AppointmentServiceImpl  implements AppointmentService {
     public Appoinment saveOrUpdateAppointment(AppointmentPojo appointmentPojo) {
         Appoinment appoinment = new Appoinment() ;
 
-        Optional<Customer> customer = customerRespository.findById((long) appointmentPojo.getCustomeId());
+        Optional<Customer> customer = customerRespository.findById((long) appointmentPojo.getCustomerId());
         Optional<com.example.backend.Entity.Service> service = serviceRespository.findById((long) appointmentPojo.getServiceId());
         if (customer.isPresent() && service.isPresent()) {
             Customer customerEntity = customer.get();
@@ -33,7 +33,7 @@ public class AppointmentServiceImpl  implements AppointmentService {
             appoinment.setService(service.get());
         } else {
 
-            throw new ResourceNotFoundException("Restaurant with ID " + appointmentPojo.getCustomeId() + " not found");
+            throw new ResourceNotFoundException("Appointment  ID " + appointmentPojo.getCustomerId() + " not found");
         }
 
 

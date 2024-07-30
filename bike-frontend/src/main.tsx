@@ -12,6 +12,9 @@ import Vehicles from "./pages/VechilePage";
 import FormsPage from "./pages/setting";
 import RootLayout from "./pages/layout";
 import Dashboard from "./pages/dashboard";
+import AddBike from "./pages/AddBike";
+import BookServiceForm from "./pages/AddBike";
+import Logout from "./pages/logout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +44,10 @@ const router = createBrowserRouter([
         path: "setting",
         element: <FormsPage />,
       },
+      {
+        path: "logout",
+        element: <Logout />,
+      },
     ],
   },
   {
@@ -50,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/book",
+    element: <AddBike />,
   },
 ]);
 

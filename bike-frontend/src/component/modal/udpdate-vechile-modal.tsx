@@ -5,15 +5,15 @@ interface UpdateVechileModalProps {
 
   initialData: {
     bikeID: number;
-    brand: String;
-    modal: String;
-    registrationNumber: String;
+    brand: string;
+    model: string;
+    registrationNumber: string;
   };
   updateVechile: (updatedVechileData: {
     bikeId: number;
-    brand: String;
-    modal: String;
-    registrationNumber: String;
+    brand: string;
+    modal: string;
+    registrationNumber: string;
   }) => void;
 }
 
@@ -24,8 +24,8 @@ const UpdateVechileModal: React.FC<UpdateVechileModalProps> = ({
 }) => {
   const [bikeId, setBikeId] = useState<number>(initialData.bikeID);
   const [brand, setBrand] = useState(initialData.brand);
-  const [modal, setModal] = useState(initialData.modal);
-  const [registrationNumber, setRegistrationNumber] = useState<String>(
+  const [modal, setModal] = useState(initialData.model);
+  const [registrationNumber, setRegistrationNumber] = useState<string>(
     initialData.registrationNumber
   );
 

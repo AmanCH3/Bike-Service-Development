@@ -9,7 +9,7 @@ const Vehicle: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [vechiles, setVechiles] = useState<getVechileResponse[]>([]);
   const itemsPerPage = 50;
-  const totalItems = 2128; // Example total items, should ideally be dynamic
+  const totalItems = 2128;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -66,8 +66,9 @@ const Vehicle: React.FC = () => {
   const fetchVechiles = async () => {
     try {
       const data = await getVechile();
+      console.log(data);
       //@ts-ignore
-      setVechiles(data.data);
+      setVechiles(data.data.content);
     } catch (error) {
       console.error("Failed to fetch vechiles:", error);
     }
@@ -78,17 +79,17 @@ const Vehicle: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-background text-foreground p-6">
+    <div className="min-h-screen w-full bg-white text-foreground p-6">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Bikes</h1>
         <div className="flex space-x-2">
           <button
             onClick={openModal}
-            className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/80"
+            className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-slate-100"
           >
             + Add Bike
           </button>
-          <button className="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg hover:bg-secondary/80">
+          <button className="bg-secondary text-secondary-foreground px-4 py-2 rounded hover:bg-slate-100 ">
             Import Bikes
           </button>
           <button className="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg hover:bg-secondary/80">
@@ -107,7 +108,7 @@ const Vehicle: React.FC = () => {
           placeholder="Search by Brand"
           className="bg-input text-foreground px-4 py-2 rounded-lg w-full max-w-md border border-border focus:ring-primary focus:border-primary"
         />
-        <select className="bg-input text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
+        <select className="bg-white text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
           <option value="model">Model</option>
         </select>
         <select className="bg-input text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">

@@ -6,6 +6,8 @@ import com.example.backend.Pojo.CustomerPojo;
 import com.example.backend.Service.BikeCenter;
 import com.example.backend.shared.pojo.GlobalApiResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,15 +19,16 @@ public class BikeController {
 
     private final BikeCenter bikeCenter;
 
-    @GetMapping
-    public GlobalApiResponse<List<Bike>> getAllBikes(BikePojo bikePojo) {
-        List<Bike> bikes = this.bikeCenter.getAllBike(bikePojo);
-        return GlobalApiResponse.<List<Bike>>builder()
-                .data(bikes)
-                .statusCode(200)
-                .message("Data retrieved successfully")
-                .build();
-    }
+//    ===========pagination ==================
+@GetMapping
+public GlobalApiResponse<List<Bike>> getAllBikes(BikePojo bikePojo) {
+    List<Bike> bikes = this.bikeCenter.getAllBike(bikePojo);
+    return GlobalApiResponse.<List<Bike>>builder()
+            .data(bikes)
+            .statusCode(200)
+            .message("Data retrieved successfully")
+            .build();
+}
 
     @PostMapping("/details")
     public GlobalApiResponse<Bike> createBike(@RequestBody BikePojo bikePojo) {

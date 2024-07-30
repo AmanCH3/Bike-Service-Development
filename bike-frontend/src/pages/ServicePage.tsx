@@ -82,7 +82,7 @@ const Service: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-background text-foreground p-6">
+    <div className="min-h-screen w-full bg-white text-foreground p-6">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Services</h1>
         <div className="flex space-x-2">
@@ -107,13 +107,13 @@ const Service: React.FC = () => {
           className="bg-input text-foreground px-4 py-2 rounded-lg w-full max-w-md border border-border focus:ring-primary focus:border-primary"
         />
         <div className="flex space-x-2">
-          <select className="bg-input text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
+          <select className="bg-white text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
             <option value="serviceId"> Service Id</option>
             <option value="serviceName">Service Name</option>
             <option value="cost">Cost</option>
             <option value="serviceDescription">Description</option>
           </select>
-          <select className="bg-input text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
+          <select className="bg-white text-foreground px-4 py-2 rounded-lg border border-border focus:ring-primary focus:border-primary">
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>

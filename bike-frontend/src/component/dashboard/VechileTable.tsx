@@ -65,8 +65,8 @@ const VehicleTable: React.FC<VehicleTableProps> = ({
       <div className="flex flex-col">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="overflow-hidden border border-gray-200 dark:border-gray-100 md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-100">
                 <thead className="bg-gray-50 bg-cyan-500">
                   <tr className="border-b">
                     <th className="px-4 py-2 text-left">Bike ID</th>
@@ -77,16 +77,16 @@ const VehicleTable: React.FC<VehicleTableProps> = ({
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 bg-gray-400">
-                  {vehicles.map((vehicle) => (
+                  {vehicles?.map((vehicle) => (
                     <tr key={vehicle.bikeId} className="border-b border-border">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-black whitespace-nowrap">
                         {vehicle.bikeId}
                       </td>
-                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800  dark:text-black whitespace-nowrap">
                         {vehicle.brand}
                       </td>
-                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
-                        {vehicle.modal}
+                      <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-black whitespace-nowrap">
+                        {vehicle.model}
                       </td>
                       <td className="px-4 py-2 text-sm font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">
                         {vehicle.registrationNumber}
@@ -113,7 +113,7 @@ const VehicleTable: React.FC<VehicleTableProps> = ({
                   initialData={{
                     bikeID: selectedVechile.bikeId,
                     brand: selectedVechile.brand,
-                    modal: selectedVechile.modal,
+                    model: selectedVechile.model,
                     registrationNumber: selectedVechile.registrationNumber,
                   }}
                   updateVechile={updateVehicle}

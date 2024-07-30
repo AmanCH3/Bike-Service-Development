@@ -3,7 +3,7 @@ import React from "react";
 
 const FormsPage: React.FC = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col items-center bg-gray-100">
+    <div className="w-full min-h-screen flex flex-col items-center bg-white">
       <div className="w-full max-w-7xl p-6">
         <h1 className="text-3xl text-black pb-6">Forms</h1>
         <div className="flex flex-wrap -mx-2">
@@ -15,10 +15,10 @@ const FormsPage: React.FC = () => {
               <form>
                 <div className="mb-4">
                   <label className="block text-sm text-gray-600" htmlFor="name">
-                    Name
+                    Brand
                   </label>
                   <input
-                    className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-5 py-1 text-gray-700 bg-background rounded"
                     id="name"
                     name="name"
                     type="text"
@@ -32,10 +32,10 @@ const FormsPage: React.FC = () => {
                     className="block text-sm text-gray-600"
                     htmlFor="email"
                   >
-                    Email
+                    Modal
                   </label>
                   <input
-                    className="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-5 py-4 text-gray-700 bg-background rounded"
                     id="email"
                     name="email"
                     type="text"
@@ -49,10 +49,10 @@ const FormsPage: React.FC = () => {
                     className="block text-sm text-gray-600"
                     htmlFor="message"
                   >
-                    Message
+                    Registration number
                   </label>
                   <textarea
-                    className="w-full px-5 py-2 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-5 py-2 text-gray-700 border-spacing-1 bg-background rounded"
                     id="message"
                     name="message"
                     rows={6}
@@ -83,13 +83,13 @@ const FormsPage: React.FC = () => {
                 </p>
                 <div className="mb-4">
                   <label
-                    className="block text-sm text-gray-600"
+                    className="block text-sm text-gray-600 "
                     htmlFor="cus_name"
                   >
                     Name
                   </label>
                   <input
-                    className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-5 py-1 text-gray-700  bg-background rounded "
                     id="cus_name"
                     name="cus_name"
                     type="text"
@@ -106,7 +106,7 @@ const FormsPage: React.FC = () => {
                     Email
                   </label>
                   <input
-                    className="w-full px-5 py-4 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-5 py-4 text-gray-700  bg-background rounded"
                     id="cus_email"
                     name="cus_email"
                     type="text"
@@ -123,7 +123,7 @@ const FormsPage: React.FC = () => {
                     Address
                   </label>
                   <input
-                    className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
                     id="cus_address"
                     name="cus_address"
                     type="text"
@@ -140,7 +140,7 @@ const FormsPage: React.FC = () => {
                     City
                   </label>
                   <input
-                    className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
                     id="cus_city"
                     name="cus_city"
                     type="text"
@@ -158,7 +158,7 @@ const FormsPage: React.FC = () => {
                       Country
                     </label>
                     <input
-                      className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+                      className="w-full px-2 py-2 text-gray-700  bg-background rounded"
                       id="cus_country"
                       name="cus_country"
                       type="text"
@@ -175,7 +175,7 @@ const FormsPage: React.FC = () => {
                       Zip
                     </label>
                     <input
-                      className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+                      className="w-full px-2 py-2 text-gray-700  bg-background rounded"
                       id="cus_zip"
                       name="cus_zip"
                       type="text"
@@ -193,7 +193,7 @@ const FormsPage: React.FC = () => {
                     Card
                   </label>
                   <input
-                    className="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
                     id="card"
                     name="card"
                     type="text"

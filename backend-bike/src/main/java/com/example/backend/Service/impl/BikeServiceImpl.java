@@ -9,6 +9,8 @@ import com.example.backend.Service.BikeCenter;
 import com.example.backend.exception.CustomException;
 import com.example.backend.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,6 +77,11 @@ public class BikeServiceImpl implements BikeCenter {
     @Override
     public List<Customer> getAllCustomers(Long customerId) {
         return customerRespository.findAll();
+    }
+
+    @Override
+    public Page<Bike> getAllBikes(Pageable pageable) {
+        return bikeRepository.findAll(pageable);
     }
 
     private void mapPojoToEntity(BikePojo bikePojo, Bike bike) {
