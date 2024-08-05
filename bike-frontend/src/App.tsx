@@ -16,7 +16,7 @@ function App() {
     AOS.refresh();
   }, []);
   return (
-    <div className="bg-background text-gray-800 min-h-screen">
+    <div className="bg-white text-gray-800 min-h-screen">
       <NavBar />
       <HeroSection />
       {/* <BookingSection /> */}

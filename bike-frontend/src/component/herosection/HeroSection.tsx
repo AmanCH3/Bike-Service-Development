@@ -5,7 +5,7 @@ const HeroSection: React.FC = () => {
   const hover = "hover:scale-110 transition-transform duration-500 ease-in-out";
   return (
     <section id="home" data-aos="flip-left">
-      <div className="flex flex-col md:flex-row justify-center bg-white  items-center ">
+      <div className="container mx-auto flex flex-col md:flex-row justify-center bg-white  items-center ">
         <div className="text-center items-center m-10 p-10 flex-1 py-20">
           <h1 className="text-4xl md:text-[60px] font-bold mb-4  ">
             Door Step <br className="hidden md:block mb-6" /> Two Wheeler
