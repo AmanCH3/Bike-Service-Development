@@ -24,23 +24,37 @@ const FormsPage: React.FC = () => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("session");
 
     if (token) {
       axios
-        .get<GetRegisterRequestBody>(`${BASE_API_URL}/customer`, {
+        .get<any>(`${BASE_API_URL}/customer`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
-          setProfileData(response.data);
+          setProfileData(response.data.data[0]);
           setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching profile data:", error);
           setError("Failed to fetch profile data.");
           setLoading(false);
+        });
+      axios
+        .get<getVechileResponse>(`${BASE_API_URL}/bike`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setBikeData(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching bike data:", error);
+          setError("Failed to fetch bike data.");
         });
     } else {
       console.error("No token found. Please log in.");
@@ -49,7 +63,11 @@ const FormsPage: React.FC = () => {
     }
   }, []);
 
-  console.log(profileData);
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Handle form submission
+    console.log("Submitting profile and bike data:", profileData, bikeData);
+  };
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center bg-white">
@@ -71,7 +89,6 @@ const FormsPage: React.FC = () => {
                     id="name"
                     name="name"
                     type="text"
-                    value={profileData.name}
                     required
                     placeholder="Your Name"
                     aria-label="Name"
@@ -143,6 +160,7 @@ const FormsPage: React.FC = () => {
                     id="cus_name"
                     name="cus_name"
                     type="text"
+                    value={profileData.name}
                     required
                     placeholder="Your Name"
                     aria-label="Name"
@@ -160,28 +178,13 @@ const FormsPage: React.FC = () => {
                     id="cus_email"
                     name="cus_email"
                     type="text"
+                    value={profileData.email}
                     required
                     placeholder="Your Email"
                     aria-label="Email"
                   />
                 </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-sm text-gray-600"
-                    htmlFor="cus_password"
-                  >
-                    Password
-                  </label>
-                  <input
-                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
-                    id="cus_password"
-                    name="cus_password"
-                    type="text"
-                    required
-                    placeholder="Password"
-                    aria-label="Password"
-                  />
-                </div>
+
                 <div className="mb-4">
                   <label
                     className="block text-sm text-gray-600"
@@ -194,6 +197,7 @@ const FormsPage: React.FC = () => {
                     id="cus_number"
                     name="cus_number"
                     type="text"
+                    value={profileData.contactNumber}
                     required
                     placeholder="contact number"
                     aria-label="Address"
@@ -210,6 +214,7 @@ const FormsPage: React.FC = () => {
                     className="w-full px-2 py-2 text-gray-700  bg-background rounded"
                     id="cus_address"
                     name="cus_address"
+                    value={profileData.address}
                     type="text"
                     required
                     placeholder="Street"
