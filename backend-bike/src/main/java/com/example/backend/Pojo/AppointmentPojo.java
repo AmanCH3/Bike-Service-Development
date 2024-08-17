@@ -15,6 +15,5 @@ public class AppointmentPojo {
     private Long customerId;
     private String date ;
     private String status ;
-    private Double paymentFirst ;
-    private String paymentType ;
+    private  int bikeId ;
 }

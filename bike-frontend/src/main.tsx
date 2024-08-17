@@ -15,6 +15,7 @@ import Dashboard from "./pages/dashboard";
 import AddBike from "./pages/AddBike";
 import BookServiceForm from "./pages/AddBike";
 import Logout from "./pages/logout";
+import ProfileForm from "./pages/ProfileForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/book",
     element: <AddBike />,
+  },
+  {
+    path: "/profile",
+    element: <ProfileForm />,
   },
 ]);
 

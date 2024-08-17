@@ -1,7 +1,56 @@
 // src/pages/FormsPage.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { GetRegisterRequestBody } from "../services/reigster.api";
+import axios from "axios";
+import { BASE_API_URL } from "../utils/api.constants";
+import { getVechileResponse } from "../services/vechile.type";
 
 const FormsPage: React.FC = () => {
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const [bikeData, setBikeData] = useState<getVechileResponse>({
+    bikeId: 0,
+    brand: "",
+    model: "",
+    registrationNumber: "",
+  });
+  const [profileData, setProfileData] = useState<GetRegisterRequestBody>({
+    name: "",
+    email: "",
+    password: "",
+    contactNumber: "",
+    address: "",
+  });
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      axios
+        .get<GetRegisterRequestBody>(`${BASE_API_URL}/customer`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setProfileData(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching profile data:", error);
+          setError("Failed to fetch profile data.");
+          setLoading(false);
+        });
+    } else {
+      console.error("No token found. Please log in.");
+      setError("No token found. Please log in.");
+      setLoading(false);
+    }
+  }, []);
+
+  console.log(profileData);
+
   return (
     <div className="w-full min-h-screen flex flex-col items-center bg-white">
       <div className="w-full max-w-7xl p-6">
@@ -22,6 +71,7 @@ const FormsPage: React.FC = () => {
                     id="name"
                     name="name"
                     type="text"
+                    value={profileData.name}
                     required
                     placeholder="Your Name"
                     aria-label="Name"
@@ -118,6 +168,40 @@ const FormsPage: React.FC = () => {
                 <div className="mb-4">
                   <label
                     className="block text-sm text-gray-600"
+                    htmlFor="cus_password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
+                    id="cus_password"
+                    name="cus_password"
+                    type="text"
+                    required
+                    placeholder="Password"
+                    aria-label="Password"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-sm text-gray-600"
+                    htmlFor="contact number"
+                  >
+                    Contact number
+                  </label>
+                  <input
+                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
+                    id="cus_number"
+                    name="cus_number"
+                    type="text"
+                    required
+                    placeholder="contact number"
+                    aria-label="Address"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-sm text-gray-600"
                     htmlFor="cus_address"
                   >
                     Address
@@ -131,84 +215,6 @@ const FormsPage: React.FC = () => {
                     placeholder="Street"
                     aria-label="Address"
                   />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="hidden text-sm block text-gray-600"
-                    htmlFor="cus_city"
-                  >
-                    City
-                  </label>
-                  <input
-                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
-                    id="cus_city"
-                    name="cus_city"
-                    type="text"
-                    required
-                    placeholder="City"
-                    aria-label="City"
-                  />
-                </div>
-                <div className="flex -mx-1 mb-4">
-                  <div className="w-1/2 px-1">
-                    <label
-                      className="hidden block text-sm text-gray-600"
-                      htmlFor="cus_country"
-                    >
-                      Country
-                    </label>
-                    <input
-                      className="w-full px-2 py-2 text-gray-700  bg-background rounded"
-                      id="cus_country"
-                      name="cus_country"
-                      type="text"
-                      required
-                      placeholder="Country"
-                      aria-label="Country"
-                    />
-                  </div>
-                  <div className="w-1/2 px-1">
-                    <label
-                      className="hidden block text-sm text-gray-600"
-                      htmlFor="cus_zip"
-                    >
-                      Zip
-                    </label>
-                    <input
-                      className="w-full px-2 py-2 text-gray-700  bg-background rounded"
-                      id="cus_zip"
-                      name="cus_zip"
-                      type="text"
-                      required
-                      placeholder="Zip"
-                      aria-label="Zip"
-                    />
-                  </div>
-                </div>
-                <p className="text-lg text-gray-800 font-medium py-4">
-                  Payment Information
-                </p>
-                <div className="mb-4">
-                  <label className="block text-sm text-gray-600" htmlFor="card">
-                    Card
-                  </label>
-                  <input
-                    className="w-full px-2 py-2 text-gray-700  bg-background rounded"
-                    id="card"
-                    name="card"
-                    type="text"
-                    required
-                    placeholder="Card Number MM/YY CVC"
-                    aria-label="Card"
-                  />
-                </div>
-                <div className="mt-6">
-                  <button
-                    className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
-                    type="submit"
-                  >
-                    $3.00
-                  </button>
                 </div>
               </form>
             </div>

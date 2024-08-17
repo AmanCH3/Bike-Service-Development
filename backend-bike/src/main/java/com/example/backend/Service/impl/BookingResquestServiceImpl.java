@@ -38,8 +38,8 @@ class BookingResquestServiceImpl implements BookingRequestService {
             bookingRequest1.setService(service.get());
         } else {
             bookingRequest1.setPreferredDate(bookingRequestPojo.getPreferredDate());
-            bookingRequest1.setPreferredTime(bookingRequestPojo.getPreferredTime());
-            bookingRequest1.setComments(bookingRequestPojo.getComments());
+            bookingRequest1.setLocation(bookingRequest1.getLocation());
+            bookingRequest1.setPayment(bookingRequest1.getPayment());
 
 
 

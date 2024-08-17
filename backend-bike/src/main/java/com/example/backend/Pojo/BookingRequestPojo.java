@@ -11,6 +11,6 @@ public class BookingRequestPojo {
     private Long customerId;
     private Long serviceId;
     private String preferredDate;
-    private String preferredTime;
-    private String comments;
+    private String location ;
+    private String payment ;
 }

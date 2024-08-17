@@ -18,7 +18,7 @@ const OrderTable: React.FC = () => {
     data: fetchedOrders,
     error,
   } = useQuery({
-    queryKey: ["orders"],
+    queryKey: ["appointment"],
     queryFn: getOrders,
   });
 
@@ -45,7 +45,7 @@ const OrderTable: React.FC = () => {
   if (isPending) return <div>Loading...</div>;
 
   if (isError) return <div>Error... {error.message}</div>;
-
+  console.log(fetchedOrders);
   return (
     <div className="bg-white p-4 rounded shadow">
       <div className="flex items-center mb-4">
