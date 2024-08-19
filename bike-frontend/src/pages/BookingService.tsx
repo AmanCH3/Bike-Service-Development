@@ -29,12 +29,16 @@ const BookingService: React.FC = () => {
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [data, setData] = useState(null);
+  const userID = localStorage.getItem("userID");
+  const token = localStorage.getItem("session");
+  console.log("token", token);
+  console.log("userID", userID);
 
   useEffect(() => {
     axios
       .get(`${BASE_API_URL}/bike`)
       .then((response) => {
-        const bikesData = response.data;
+        const bikesData = response.data.data;
         if (Array.isArray(bikesData)) {
           setBikes(bikesData);
         } else {
@@ -46,7 +50,7 @@ const BookingService: React.FC = () => {
     axios
       .get(`${BASE_API_URL}/service`)
       .then((response) => {
-        const servicesData = response.data;
+        const servicesData = response.data.data;
         if (Array.isArray(servicesData)) {
           setServices(servicesData);
         } else {
@@ -55,6 +59,9 @@ const BookingService: React.FC = () => {
       })
       .catch((error) => console.error("Error fetching services:", error));
   }, []);
+  console.log("bikes", bikes);
+  console.log("services", services);
+  console.log("selectServiceId", selectedServiceId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,23 +73,26 @@ const BookingService: React.FC = () => {
       location
     ) {
       const bookingData = {
-        bikeId: selectedBikeId,
+        customerId: userID,
         serviceId: selectedServiceId,
-        date,
+        preferredDate: date,
         paymentMethod,
         location,
-        status: "Pending", // Default status
       };
 
       axios
-        .post(`${BASE_API_URL}/api/bookings`, bookingData)
+        .post(`${BASE_API_URL}/ride`, bookingData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           console.log("Booking successful:", response.data);
           alert("Booking successful!");
         })
         .catch((error) => {
           console.error("Error booking service:", error);
-          alert("Failed to book service. Please try again.");
+          alert(error);
         });
     } else {
       alert("Please fill in all fields.");
@@ -93,10 +103,12 @@ const BookingService: React.FC = () => {
     <div className="w-max[full]">
       <NavBar />
       {/* ============= title============= */}
-      <div className="m-8 text-3xl font-semibold">
-        <h1>Book your service by filling this info</h1>
+      <div className="m-8  text-3xl font-semibold">
+        <center>
+          <h1>Book your service by filling this info</h1>
+        </center>
       </div>
-      <div className="leading-loose bg-white rounded shadow-xl p-6 border-solid">
+      <div className="leading-loose bg-white rounded w-[50] shadow-xl p-6 border-solid">
         <form className="m-6 border-solid gap-4" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm text-gray-600" htmlFor="bike">

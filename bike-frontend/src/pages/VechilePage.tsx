@@ -66,9 +66,8 @@ const Vehicle: React.FC = () => {
   const fetchVechiles = async () => {
     try {
       const data = await getVechile();
-      console.log(data);
       //@ts-ignore
-      setVechiles(data.data.content);
+      setVechiles(data.data);
     } catch (error) {
       console.error("Failed to fetch vechiles:", error);
     }

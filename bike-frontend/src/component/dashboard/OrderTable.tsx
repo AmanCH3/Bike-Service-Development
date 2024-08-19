@@ -5,47 +5,7 @@ import DeleteOrderModal from "../modal/delete-order-modal";
 import UpdateOrderModal from "../modal/update-order-modal";
 import { GetOrdersResponse } from "../../services/orders.type";
 
-const OrderTable: React.FC = () => {
-  const [selectedOrder, setSelectedOrder] = useState<GetOrdersResponse | null>(
-    null
-  );
-  const [isUpdatePopupOpen, setIsUpdatePopupOpen] = useState(false);
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-
-  const {
-    isPending,
-    isError,
-    data: fetchedOrders,
-    error,
-  } = useQuery({
-    queryKey: ["appointment"],
-    queryFn: getOrders,
-  });
-
-  const handleUpdate = (order: GetOrdersResponse) => {
-    setSelectedOrder(order);
-    setIsUpdatePopupOpen(true);
-  };
-
-  const handleDelete = (order: GetOrdersResponse) => {
-    setSelectedOrder(order);
-    setIsDeletePopupOpen(true);
-  };
-
-  const closeUpdatePopup = () => {
-    setIsUpdatePopupOpen(false);
-    setSelectedOrder(null);
-  };
-
-  const closeDeletePopup = () => {
-    setIsDeletePopupOpen(false);
-    setSelectedOrder(null);
-  };
-
-  if (isPending) return <div>Loading...</div>;
-
-  if (isError) return <div>Error... {error.message}</div>;
-  console.log(fetchedOrders);
+const OrderTable = () => {
   return (
     <div className="bg-white p-4 rounded shadow">
       <div className="flex items-center mb-4">
@@ -58,67 +18,41 @@ const OrderTable: React.FC = () => {
       <table className="w-full text-left">
         <thead>
           <tr className="border-b border-border">
-            <th className="py-2">Center ID</th>
+            <th className="py-2">Appointment Id</th>
             <th className="py-2">Date of Created</th>
             <th className="py-2">Customer</th>
-            <th className="py-2">Amount</th>
+            <th className="py-2">Service</th>
             <th className="py-2">Payment type</th>
-            <th className="py-2">Status</th>
-            <th className="py-2">Action</th>
+            <th className="py-2">Location</th>
+            <th className="py-2"> Action</th>
           </tr>
         </thead>
         <tbody>
-          {fetchedOrders?.map((order) => (
-            <tr key={order.customerId} className="border-b border-border">
-              <td className="py-2">{order.customerId}</td>
-              <td className="py-2">{order.serviceId}</td>
-              <td className="py-2">{order.date}</td>
-              <td className="py-2">{order.paymentFirst}</td>
-              <td className="py-2 text-green-500">{order.paymentType}</td>
+          <tr className="border-b border-border">
+            <td className="py-2">AppointmentId</td>
+            <td className="py-2">preferredDate</td>
+            <td className="py-2">customer</td>
+            <td className="py-2">service</td>
+            <td className="py-2">Location</td>
+            <td className="py-2">payment </td>
 
-              <td
-                className={`py-2 ${
-                  order.status === "Processing"
-                    ? "text-yellow-500"
-                    : order.status === "Delivered"
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
+            <td className="py-2">
+              <button
+                className="btn btn-primary mr-2"
+                // onClick={() => handleUpdate(order)}
               >
-                {order.status}
-              </td>
-              <td className="py-2">
-                <button
-                  className="btn btn-primary mr-2"
-                  onClick={() => handleUpdate(order)}
-                >
-                  Update
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(order)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+                Update
+              </button>
+              <button
+                className="btn btn-danger"
+                // onClick={() => handleDelete(order)}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
-
-      {isUpdatePopupOpen && selectedOrder && (
-        <UpdateOrderModal
-          selectedOrder={selectedOrder}
-          closeUpdatePopup={closeUpdatePopup}
-        />
-      )}
-
-      {isDeletePopupOpen && selectedOrder && (
-        <DeleteOrderModal
-          selectedOrder={selectedOrder}
-          closeDeletePopup={closeDeletePopup}
-        />
-      )}
     </div>
   );
 };

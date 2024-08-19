@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/customer")
 @CrossOrigin("*")
 @RequiredArgsConstructor
-public class CustomerController {
+public class    CustomerController {
 
     private final CustomerService customerService;
 
