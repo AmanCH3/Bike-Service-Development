@@ -12,10 +12,11 @@ import Vehicles from "./pages/VechilePage";
 import FormsPage from "./pages/setting";
 import RootLayout from "./pages/layout";
 import Dashboard from "./pages/dashboard";
-import AddBike from "./pages/AddBike";
-import BookServiceForm from "./pages/AddBike";
+import AddBike from "./pages/BookingService";
+import BookServiceForm from "./pages/BookingService";
 import Logout from "./pages/logout";
 import ProfileForm from "./pages/ProfileForm";
+import BookingService from "./pages/BookingService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/book",
-    element: <AddBike />,
+    element: <BookingService />,
   },
   {
     path: "/profile",

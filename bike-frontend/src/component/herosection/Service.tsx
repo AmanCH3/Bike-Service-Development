@@ -37,9 +37,11 @@ const Services: React.FC = () => {
   };
   return (
     <section id="contact" className="p-10 bg-white">
-      <h2 className="text-5xl font-bold text-center mb-6 px-6">Our Services</h2>
+      <h2 className="text-5xl font-bold text-center mb-6 px-6 ">
+        Our Services
+      </h2>
       <div
-        className="w-full h-full flex flex-wrap justify-center m-6 py-6 "
+        className="w-full h-full flex flex-wrap justify-center m-6 py-12  "
         style={{ gap: "5rem" }}
       >
         {services.map((service, index) => (

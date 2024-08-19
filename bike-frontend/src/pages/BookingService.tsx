@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../component/navbar/NavBar";
 import motor from "../assets/motorcycle.png";
+import { BASE_API_URL } from "../utils/api.constants";
 
-// Define the interfaces for Bike and Service
 interface Bike {
   bikeId: number;
   brand: string;
@@ -18,7 +18,7 @@ interface Service {
   cost: number;
 }
 
-const AddBike: React.FC = () => {
+const BookingService: React.FC = () => {
   const [bikes, setBikes] = useState<Bike[]>([]);
   const [services, setServices] = useState<Service[]>([]);
   const [selectedBikeId, setSelectedBikeId] = useState<number | null>(null);
@@ -26,11 +26,13 @@ const AddBike: React.FC = () => {
     null
   );
   const [date, setDate] = useState<string>("");
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Fetch bikes and services from the backend
     axios
-      .get("/bike")
+      .get(`${BASE_API_URL}/bike`)
       .then((response) => {
         const bikesData = response.data;
         if (Array.isArray(bikesData)) {
@@ -42,7 +44,7 @@ const AddBike: React.FC = () => {
       .catch((error) => console.error("Error fetching bikes:", error));
 
     axios
-      .get("/service")
+      .get(`${BASE_API_URL}/service`)
       .then((response) => {
         const servicesData = response.data;
         if (Array.isArray(servicesData)) {
@@ -56,16 +58,24 @@ const AddBike: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedBikeId && selectedServiceId && date) {
+    if (
+      selectedBikeId &&
+      selectedServiceId &&
+      date &&
+      paymentMethod &&
+      location
+    ) {
       const bookingData = {
         bikeId: selectedBikeId,
         serviceId: selectedServiceId,
         date,
+        paymentMethod,
+        location,
         status: "Pending", // Default status
       };
 
       axios
-        .post("/api/bookings", bookingData)
+        .post(`${BASE_API_URL}/api/bookings`, bookingData)
         .then((response) => {
           console.log("Booking successful:", response.data);
           alert("Booking successful!");
@@ -75,7 +85,7 @@ const AddBike: React.FC = () => {
           alert("Failed to book service. Please try again.");
         });
     } else {
-      alert("Please select a bike, service, and date.");
+      alert("Please fill in all fields.");
     }
   };
 
@@ -144,6 +154,36 @@ const AddBike: React.FC = () => {
               required
             />
           </div>
+
+          <div className="mb-4">
+            <label className="block text-sm text-gray-600" htmlFor="payment">
+              Payment Method
+            </label>
+            <input
+              className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+              id="payment"
+              name="payment"
+              placeholder="Cash or Card"
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm text-gray-500" htmlFor="location">
+              Location
+            </label>
+            <input
+              className="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"
+              id="location"
+              name="location"
+              placeholder="Pick up location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+            />
+          </div>
           <div className="mt-6">
             <button
               className="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
@@ -154,6 +194,7 @@ const AddBike: React.FC = () => {
           </div>
         </form>
       </div>
+
       {/* ========================================booking ======================= */}
       <div className="flex flex-row justify-center px-12 bg-white ">
         <div>
@@ -163,10 +204,10 @@ const AddBike: React.FC = () => {
         {/* ============other text================== */}
 
         <div className="max-w-4xl bg-white p-8 rounded-lg ">
-          <h2 className="text-3xl font-bold  mb-8 text-blue-500">
+          <h2 className="text-3xl font-bold mb-8 text-blue-500">
             Service Includes
           </h2>
-          <div className="flex  gap-20 px-10 space-x-9">
+          <div className="flex gap-20 px-10 space-x-9">
             <div className="flex-1 ">
               <div className="mb-6">
                 <h3 className="text-xl font-semibold mb-2">Basic Tune-Up:</h3>
@@ -227,4 +268,4 @@ const AddBike: React.FC = () => {
   );
 };
 
-export default AddBike;
+export default BookingService;
