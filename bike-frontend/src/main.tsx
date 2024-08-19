@@ -17,6 +17,8 @@ import BookServiceForm from "./pages/BookingService";
 import Logout from "./pages/logout";
 import ProfileForm from "./pages/ProfileForm";
 import BookingService from "./pages/BookingService";
+import Error404 from "./pages/Error";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +69,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfileForm />,
+  },
+  {
+    path: "*", // Catch-all route for undefined paths
+    element: <Error404 />, // Render the Error404 component
   },
 ]);
 
