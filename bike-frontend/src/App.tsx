@@ -19,8 +19,6 @@ function App() {
     <div className="bg-white text-gray-800 min-h-screen">
       <NavBar />
       <HeroSection />
-      {/* <BookingSection /> */}
-      {/* <SechulingCalander /> */}
       <Services />
       <WarrantySection />
       <ReviewsSection />

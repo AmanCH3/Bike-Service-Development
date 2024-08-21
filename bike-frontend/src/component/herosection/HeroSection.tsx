@@ -7,9 +7,9 @@ const HeroSection: React.FC = () => {
     <section id="home" data-aos="flip-left">
       <div className="container mx-auto flex flex-col md:flex-row justify-center bg-white  items-center ">
         <div className="text-center items-center m-10 p-10 flex-1 py-20">
-          <h1 className="text-4xl md:text-[60px] font-bold mb-4  ">
-            Door Step <br className="hidden md:block mb-6" /> Two Wheeler
-            Servicing
+          <h1 className="text-4xl md:text-[60px] font-bold mb-4 leading-tight">
+            <span>Door Step</span>
+            <span className="block md:inline-block">Two Wheeler Servicing</span>
           </h1>
           <p className="text-lg text-service mb-2 py-4">
             Service at your home or office, 7 days a week,{" "}

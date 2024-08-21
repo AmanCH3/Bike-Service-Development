@@ -4,12 +4,11 @@ import com.example.backend.Entity.BookingRequest;
 import com.example.backend.Entity.Customer;
 import com.example.backend.Entity.Service;
 import com.example.backend.Pojo.BookingRequestPojo;
+import com.example.backend.Pojo.BookingRequestPojo;
 import com.example.backend.Repository.BookingRequestRepository;
 import com.example.backend.Repository.CustomerRespository;
 import com.example.backend.Repository.ServiceRespository;
-import com.example.backend.Service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +26,9 @@ public class CustomerServiceController {
     private final ServiceRespository serviceRespository;
 
     @GetMapping
-    public ResponseEntity<List<Service>> getAllServices() {
-        List<Service> services = serviceRespository.findAll();
-        return ResponseEntity.ok(services);
+    public ResponseEntity<List<BookingRequest>> getAll() {
+        List<BookingRequest> bookingRequests = bookingRequestRepository.findAll();
+        return ResponseEntity.ok(bookingRequests) ;
     }
 
     @PostMapping
