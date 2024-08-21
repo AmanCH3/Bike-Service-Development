@@ -1,8 +1,10 @@
 package com.example.backend.Service.impl;
 
 
+import com.example.backend.Entity.Admin;
 import com.example.backend.Entity.Customer;
 import com.example.backend.Pojo.AuthPojo;
+import com.example.backend.Repository.AdminRespository;
 import com.example.backend.Repository.CustomerRespository;
 import com.example.backend.Security.JwtService;
 import com.example.backend.Service.AuthenticateService;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticateServiceImpl implements AuthenticateService {
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailService userDetailsService;
+    private final AdminRespository adminRespository ;
     private final JwtService jwtUtils;
    private final CustomerRespository customerRespository ;
 
@@ -46,6 +49,15 @@ public class AuthenticateServiceImpl implements AuthenticateService {
 
                     .UserId(customer.getCustomerId())
                     .UserType(customer.getRole().name())
+                    .build() ;
+        }
+
+        Admin admin = adminRespository.findByEmail(authPojo.getEmail()).orElse(null) ;
+        if (admin != null) {
+            return  AuthResponse.builder()
+                    .token(jwtToken)
+                    .UserId(admin.getAdminID())
+                    .UserType(admin.getRole().name())
                     .build() ;
         }
 

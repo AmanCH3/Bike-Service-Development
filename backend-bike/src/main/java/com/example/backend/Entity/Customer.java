@@ -58,7 +58,7 @@ public class Customer implements UserDetails {
     private String password ;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserType role = UserType.ADMIN;
+    private UserType role = UserType.CUSTOMER;
 
 
 
