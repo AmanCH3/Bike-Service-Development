@@ -7,3 +7,11 @@ export interface RegisterRequestBody {
   contactNumber: string;
   address: string;
 }
+
+export interface GetRegisterRequestBody {
+  name: string;
+  email: string;
+  password: string;
+  contactNumber: string;
+  address: string;
+}

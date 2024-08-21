@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "appointment")
@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Appoinment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointment_id")
@@ -34,14 +35,10 @@ public class Appoinment {
     @Column(name = "appointment_date", nullable = false)
     private String appointmentDate;
 
-    @NotNull(message = "Status is mandatory")
-    @Column(name = "status", nullable = false)
+    @Column(name = "status", nullable = true)
     private String status;
 
-    @NotNull(message = "Payment first is mandatory")
-    @Column(name = "payment_first", nullable = false)
-    private Double paymentFirst;
-
-    @Column(name = "payment_type", nullable = true)
-    private String paymentType;
+    @OneToOne
+    @JoinColumn(name = "bike_id", referencedColumnName = "bike_id", nullable = false)
+    private Bike bike;
 }

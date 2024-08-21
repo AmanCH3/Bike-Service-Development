@@ -21,7 +21,7 @@ const Vehicle: React.FC = () => {
       requestBody[key] = value.toString();
     });
     const jsonBody = JSON.stringify(requestBody);
-    console.log(jsonBody);
+    // console.log(jsonBody);
 
     try {
       const response = await fetch(POST_BIKE_URL, {
@@ -68,7 +68,7 @@ const Vehicle: React.FC = () => {
       const data = await getVechile();
       console.log(data);
       //@ts-ignore
-      setVechiles(data.data.content);
+      setVechiles(data.data);
     } catch (error) {
       console.error("Failed to fetch vechiles:", error);
     }
@@ -77,6 +77,7 @@ const Vehicle: React.FC = () => {
   useEffect(() => {
     fetchVechiles();
   }, []);
+  console.log("randi ko ban",vechiles)
 
   return (
     <div className="min-h-screen w-full bg-white text-foreground p-6">
@@ -137,7 +138,7 @@ const Vehicle: React.FC = () => {
         </button>
       </div>
       {isModalOpen && (
-        <AddVehicleModal openAddPopup={openModal} handleSubmit={handleSubmit} />
+        <AddVehicleModal openAddPopup={openModal} closePopup={closeModal} handleSubmit={handleSubmit} />
       )}
     </div>
   );

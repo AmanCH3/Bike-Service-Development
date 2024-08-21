@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 interface AddVehicleModalProps {
   openAddPopup: () => void;
+  closePopup: () => void;
   handleSubmit: (
     e: React.FormEvent<HTMLFormElement>,
     vechileData: {
@@ -14,6 +15,7 @@ interface AddVehicleModalProps {
 
 const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
   openAddPopup,
+  closePopup,
   handleSubmit,
 }) => {
   const [customerID, setCustomerId] = useState<number>(0);
@@ -33,7 +35,7 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
       <div className="p-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">Add Vehicle</h1>
-          <button onClick={openAddPopup} className="text-xl font-bold">
+          <button onClick={closePopup} className="text-xl font-bold">
             X
           </button>
         </div>

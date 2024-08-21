@@ -34,10 +34,11 @@ public class BookingRequest {
     @Column(name = "preferred_date", nullable = false)
     private String preferredDate;
 
-    @NotNull(message = "Time is mandatory")
-    @Column(name = "preferred_time", nullable = false)
-    private String preferredTime;
+   @Column(name = "location" , nullable = true)
+    private String location;
 
-    @Column(name = "comments", nullable = true)
-    private String comments;
+   @Column(name ="payment" , nullable = true)
+    private String payment;
+
+
 }

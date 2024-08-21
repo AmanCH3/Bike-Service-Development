@@ -15,10 +15,10 @@ const services = [
     icon: Vector,
   },
   {
-    title: "Membership",
+    title: "Service",
     description:
-      "Join our membership program for exclusive benefits. Enjoy priority service, discounts on all services, free regular check-ups, and access to special offers. Become a member today for unmatched care and savings for your bike.",
-    button: "Join",
+      "Finding a bike servicing pick-up and drop service in Kathmandu might require some effort While specific services may be limited, exploring local bike shops, online platforms, and social media can help locate options. Consider factors like reputation, pricing, services offered, and convenience when choosing a provider",
+    button: "Service",
     icon: ve,
   },
   {
@@ -37,15 +37,15 @@ const Services: React.FC = () => {
   };
   return (
     <section id="contact" className="p-10 bg-white">
-      <h2 className="text-5xl font-bold text-center mb-6">Our Services</h2>
+      <h2 className="text-5xl font-bold text-center mb-6 px-6">Our Services</h2>
       <div
-        className="w-full h-full flex flex-wrap justify-center  "
-        style={{ gap: "3rem" }}
+        className="w-full h-full flex flex-wrap justify-center m-6 py-6 "
+        style={{ gap: "5rem" }}
       >
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center gap-3 mr hover:scale-105 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
+            className="bg-white p-6 mx-6 px-6 rounded-lg shadow-lg flex flex-col items-center gap-3 mr hover:scale-105 transition-transform duration-500 ease-in-out  w-[200] h-[200] md:w-[300] md:h-[300]"
             style={{ width: "356px", height: "auto" }}
           >
             <img

@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import profile from "../../assets/profile.png";
 import { twMerge } from "tailwind-merge";
+import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleProfileClick = () => {
+    navigate("/profile"); // Replace with the route to your ProfileForm page
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,6 +72,7 @@ const NavBar: React.FC = () => {
             src={profile}
             alt="Profile"
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
+            onClick={handleProfileClick}
           />
 
           <Link

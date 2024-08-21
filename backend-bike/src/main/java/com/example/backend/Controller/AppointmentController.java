@@ -19,6 +19,7 @@ public class AppointmentController {
 
     @GetMapping
     public GlobalApiResponse <List<Appoinment>> getAppointment(AppointmentPojo appointmentPojo) {
+        System.out.println(appointmentPojo);
          List<Appoinment> appoinment = this.appointmentService.getAllAppointment(appointmentPojo) ;
          return GlobalApiResponse.<List<Appoinment>>builder()
                  .data(appoinment)

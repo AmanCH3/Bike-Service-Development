@@ -20,11 +20,10 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 class BookingResquestServiceImpl implements BookingRequestService {
+
     private final BookingRequestRepository bookingRequestRepository;
-
-    private final CustomerRespository customerRespository ;
-
-    private final ServiceRespository serviceRespository ;
+    private final CustomerRespository customerRespository;
+    private final ServiceRespository serviceRespository;
 
     @Override
     public BookingRequest addBookingRequest(BookingRequestPojo bookingRequestPojo) {
@@ -32,21 +31,28 @@ class BookingResquestServiceImpl implements BookingRequestService {
 
         Optional<Customer> customer = customerRespository.findById(bookingRequestPojo.getCustomerId());
         Optional<com.example.backend.Entity.Service> service = serviceRespository.findById(bookingRequestPojo.getServiceId());
+
         if (customer.isPresent() && service.isPresent()) {
-            Customer customerEntity = customer.get();
-            bookingRequest1.setCustomer(customerEntity);
+            bookingRequest1.setCustomer(customer.get());
             bookingRequest1.setService(service.get());
         } else {
-            bookingRequest1.setPreferredDate(bookingRequestPojo.getPreferredDate());
-            bookingRequest1.setPreferredTime(bookingRequestPojo.getPreferredTime());
-            bookingRequest1.setComments(bookingRequestPojo.getComments());
-
-
-
-
+            // Handle the case where customer or service is missing
+            if (!customer.isPresent()) {
+                System.out.println("Customer not found with ID: " + bookingRequestPojo.getCustomerId());
+            }
+            if (!service.isPresent()) {
+                System.out.println("Service not found with ID: " + bookingRequestPojo.getServiceId());
+            }
+            // You may choose to throw an exception here or set default values
+            throw new RuntimeException("Customer not found with ID: " + bookingRequestPojo.getCustomerId());
         }
-        return bookingRequestRepository.save(bookingRequest1);
 
+        // Set other fields regardless of whether customer and service are found
+        bookingRequest1.setPreferredDate(bookingRequestPojo.getPreferredDate());
+        bookingRequest1.setLocation(bookingRequestPojo.getLocation());
+        bookingRequest1.setPayment(bookingRequestPojo.getPayment());
+
+        return bookingRequestRepository.save(bookingRequest1);
     }
 
     @Override
