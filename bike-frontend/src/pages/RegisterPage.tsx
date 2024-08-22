@@ -33,7 +33,7 @@ const RegisterPage = () => {
       }
 
       // Redirect to Landing page page after successful registration
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.error("Registration failed:", error);
       alert("Registration failed. Please try again.");

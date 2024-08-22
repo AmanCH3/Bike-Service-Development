@@ -1,4 +1,3 @@
-// BikeManagement.tsx
 import React, { useState, useEffect } from "react";
 import {
   createVechileRequestBody,
@@ -6,11 +5,11 @@ import {
 } from "../services/vechile.type";
 import { createVechile, getVechile } from "../services/vechile.api";
 import NavBar from "../component/navbar/NavBar";
-import Vehicle from "./VechilePage";
 
 const BikeManagement: React.FC = () => {
   const [bikes, setBikes] = useState<getVechileResponse[]>([]);
   const [formData, setFormData] = useState<createVechileRequestBody>({
+    customerID: 0,
     brand: "",
     model: "",
     registrationNumber: "",
@@ -23,7 +22,7 @@ const BikeManagement: React.FC = () => {
       //@ts-ignore
       setBikes(data.data);
     } catch (error) {
-      console.error("Failed to fetch vechiles:", error);
+      console.error("Failed to fetch vehicles:", error);
       setMessage("Failed to fetch data");
     }
   };
@@ -34,19 +33,27 @@ const BikeManagement: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: name === "customerID" ? parseInt(value, 10) : value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Ensure customerID is provided
+    if (formData.customerID <= 0) {
+      setMessage("Customer ID must be greater than 0.");
+      return;
+    }
+
     try {
       await createVechile(formData);
       setMessage("Bike added successfully.");
       fetchBikes(); // Refresh the bike list
-      console.log(fetchBikes);
       setFormData({
-        customerID: 0, // Reset to the actual customerId
+        customerID: 1, // Reset to initial state
         brand: "",
         model: "",
         registrationNumber: "",
@@ -64,6 +71,24 @@ const BikeManagement: React.FC = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">Bike Management</h1>
 
         <form onSubmit={handleSubmit} className="mb-4">
+          <div className="mb-4">
+            <label
+              className="block text-sm font-bold mb-2"
+              htmlFor="customerID"
+            >
+              Customer
+            </label>
+            <input
+              type="number" // Changed to 'number' for better validation
+              id="customerID"
+              name="customerID"
+              value={formData.customerID || ""}
+              onChange={handleInputChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2" htmlFor="brand">
               Brand
