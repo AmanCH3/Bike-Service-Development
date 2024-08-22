@@ -6,7 +6,7 @@ export interface getVechileResponse {
 }
 
 export interface createVechileRequestBody {
-  customerID: number;
+  customerID?: number;
   brand: string;
   model: string;
   registrationNumber: string;

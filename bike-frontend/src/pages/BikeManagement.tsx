@@ -6,30 +6,31 @@ import {
 } from "../services/vechile.type";
 import { createVechile, getVechile } from "../services/vechile.api";
 import NavBar from "../component/navbar/NavBar";
+import Vehicle from "./VechilePage";
 
 const BikeManagement: React.FC = () => {
   const [bikes, setBikes] = useState<getVechileResponse[]>([]);
   const [formData, setFormData] = useState<createVechileRequestBody>({
-    customerID: 0, // Replace with actual customerId
     brand: "",
     model: "",
     registrationNumber: "",
   });
   const [message, setMessage] = useState<string>("");
 
-  useEffect(() => {
-    fetchBikes();
-  }, []);
-
   const fetchBikes = async () => {
     try {
       const data = await getVechile();
-      setBikes(data);
+      //@ts-ignore
+      setBikes(data.data);
     } catch (error) {
-      console.error("Failed to fetch bikes:", error);
-      setMessage("Failed to load bike data.");
+      console.error("Failed to fetch vechiles:", error);
+      setMessage("Failed to fetch data");
     }
   };
+
+  useEffect(() => {
+    fetchBikes();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,6 +44,7 @@ const BikeManagement: React.FC = () => {
       await createVechile(formData);
       setMessage("Bike added successfully.");
       fetchBikes(); // Refresh the bike list
+      console.log(fetchBikes);
       setFormData({
         customerID: 0, // Reset to the actual customerId
         brand: "",

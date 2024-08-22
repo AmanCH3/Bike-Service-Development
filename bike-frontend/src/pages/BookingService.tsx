@@ -40,11 +40,8 @@ const BookingService: React.FC = () => {
       .then((response) => {
         const bikesData = response.data.data;
         console.log(bikesData);
-        // if (Array.isArray(bikesData)) {
+
         setBikes(bikesData);
-        // } else {
-        //   console.error("Bikes data is not an array:", bikesData);
-        // }
       })
       .catch((error) => console.error("Error fetching bikes:", error));
 
@@ -53,11 +50,8 @@ const BookingService: React.FC = () => {
       .then((response) => {
         const servicesData = response.data.data;
         console.log(servicesData);
-        // if (Array.isArray(servicesData)) {
+
         setServices(servicesData);
-        // } else {
-        //   console.error("Services data is not an array:", servicesData);
-        // }
       })
       .catch((error) => console.error("Error fetching services:", error));
   }, []);
