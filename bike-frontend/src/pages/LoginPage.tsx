@@ -14,12 +14,15 @@ const LoginPage: React.FC = () => {
       localStorage.setItem("session", token); // Save JWT token
       localStorage.setItem("roles", JSON.stringify(userType)); // Save roles
       localStorage.setItem("userID", userId); // Save userID
+      console.log(localStorage.getItem(userId));
+      console.log(localStorage.getItem(userType));
 
       // Role-based redirection
       if (userType.includes("ROLE_ADMIN") || userType === "ADMIN") {
         navigate("/dashboard");
-      } else {
-        navigate("/user-dashboard");
+      } else if (userType.includes("CUSTOMER") || userType == "CUSTOMER") {
+        // ================navigate to home when the we found the customer ==============
+        navigate("/home");
       }
     } catch (error) {
       console.error("Login failed:", error);

@@ -21,7 +21,7 @@ const Vehicle: React.FC = () => {
       requestBody[key] = value.toString();
     });
     const jsonBody = JSON.stringify(requestBody);
-    console.log(jsonBody);
+    // console.log(jsonBody);
 
     try {
       const response = await fetch(POST_BIKE_URL, {
@@ -136,7 +136,11 @@ const Vehicle: React.FC = () => {
         </button>
       </div>
       {isModalOpen && (
-        <AddVehicleModal openAddPopup={openModal} handleSubmit={handleSubmit} />
+        <AddVehicleModal
+          openAddPopup={openModal}
+          closePopup={closeModal}
+          handleSubmit={handleSubmit}
+        />
       )}
     </div>
   );

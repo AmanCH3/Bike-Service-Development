@@ -59,8 +59,7 @@ const VehicleTable: React.FC<VehicleTableProps> = ({
       alert("Failed to update vehicle. Please try again.");
     }
   };
-  console.log("randi ko choro vechical", vehicles);
-
+console.log("Bechical", vehicles);
   return (
     <div className="container px-4 mx-auto">
       <div className="flex flex-col">

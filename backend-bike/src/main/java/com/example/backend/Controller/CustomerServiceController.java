@@ -2,6 +2,8 @@ package com.example.backend.Controller;
 
 import com.example.backend.Entity.BookingRequest;
 import com.example.backend.Entity.Customer;
+import com.example.backend.Entity.Service;
+import com.example.backend.Pojo.BookingRequestPojo;
 import com.example.backend.Pojo.BookingRequestPojo;
 import com.example.backend.Repository.BookingRequestRepository;
 import com.example.backend.Repository.CustomerRespository;

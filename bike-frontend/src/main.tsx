@@ -18,6 +18,8 @@ import Logout from "./pages/logout";
 import ProfileForm from "./pages/ProfileForm";
 import BookingService from "./pages/BookingService";
 import Error404 from "./pages/Error";
+import ShowService from "./pages/ShowService";
+import BikeManagement from "./pages/BikeManagement";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +71,16 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfileForm />,
+  },
+
+  {
+    path: "/service",
+    element: <ShowService />,
+  },
+
+  {
+    path: "/bike",
+    element: <BikeManagement />,
   },
   {
     path: "*", // Catch-all route for undefined paths

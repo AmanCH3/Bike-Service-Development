@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBar from "../component/navbar/NavBar";
 import motor from "../assets/motorcycle.png";
 import { BASE_API_URL } from "../utils/api.constants";
-
+// Define the interfaces for Bike and Service
 interface Bike {
   bikeId: number;
   brand: string;
@@ -39,11 +39,12 @@ const BookingService: React.FC = () => {
       .get(`${BASE_API_URL}/bike`)
       .then((response) => {
         const bikesData = response.data.data;
-        if (Array.isArray(bikesData)) {
-          setBikes(bikesData);
-        } else {
-          console.error("Bikes data is not an array:", bikesData);
-        }
+        console.log(bikesData);
+        // if (Array.isArray(bikesData)) {
+        setBikes(bikesData);
+        // } else {
+        //   console.error("Bikes data is not an array:", bikesData);
+        // }
       })
       .catch((error) => console.error("Error fetching bikes:", error));
 
@@ -51,11 +52,12 @@ const BookingService: React.FC = () => {
       .get(`${BASE_API_URL}/service`)
       .then((response) => {
         const servicesData = response.data.data;
-        if (Array.isArray(servicesData)) {
-          setServices(servicesData);
-        } else {
-          console.error("Services data is not an array:", servicesData);
-        }
+        console.log(servicesData);
+        // if (Array.isArray(servicesData)) {
+        setServices(servicesData);
+        // } else {
+        //   console.error("Services data is not an array:", servicesData);
+        // }
       })
       .catch((error) => console.error("Error fetching services:", error));
   }, []);
