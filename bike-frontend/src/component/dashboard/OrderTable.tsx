@@ -1,11 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { getOrders } from "../../services/orders.api";
-import DeleteOrderModal from "../modal/delete-order-modal";
-import UpdateOrderModal from "../modal/update-order-modal";
-import { GetOrdersResponse } from "../../services/orders.type";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_API_URL } from "../../utils/api.constants";
 
 const OrderTable = () => {
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem("session");
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_API_URL}/ride`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const rideData = response.data;
+        if (Array.isArray(rideData)) {
+          setData(rideData);
+        } else {
+          console.error("Services data is not an array:", rideData);
+        }
+      })
+      .catch((error) => console.error("Error fetching services:", error));
+  }, []);
+
   return (
     <div className="bg-white p-4 rounded shadow">
       <div className="flex items-center mb-4">
@@ -22,35 +40,28 @@ const OrderTable = () => {
             <th className="py-2">Date of Created</th>
             <th className="py-2">Customer</th>
             <th className="py-2">Service</th>
-            <th className="py-2">Payment type</th>
             <th className="py-2">Location</th>
-            <th className="py-2"> Action</th>
+            <th className="py-2">Payment type</th>
+            <th className="py-2">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b border-border">
-            <td className="py-2">AppointmentId</td>
-            <td className="py-2">preferredDate</td>
-            <td className="py-2">customer</td>
-            <td className="py-2">service</td>
-            <td className="py-2">Location</td>
-            <td className="py-2">payment </td>
-
-            <td className="py-2">
-              <button
-                className="btn btn-primary mr-2"
-                // onClick={() => handleUpdate(order)}
-              >
-                Update
-              </button>
-              <button
-                className="btn btn-danger"
-                // onClick={() => handleDelete(order)}
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
+          {data.map((item) => (
+            <tr key={item.appointmentId} className="border-b border-border">
+              <td className="py-2">{item.appointmentId}</td>
+              <td className="py-2">{item.preferredDate}</td>
+              <td className="py-2">{item.customer.name}</td>
+              <td className="py-2">
+                {item.service.serviceName} - {item.service.description} (${item.service.cost})
+              </td>
+              <td className="py-2">{item.location || "N/A"}</td>
+              <td className="py-2">{item.payment || "N/A"}</td>
+              <td className="py-2">
+                <button className="btn btn-primary mr-2">Update</button>
+                <button className="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

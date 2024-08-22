@@ -13,7 +13,6 @@ const Sidebar = () => {
     if (confirmLogout) {
       // Perform logout logic here, such as clearing tokens or user data
       navigate("/"); // Navigate to the landing page
-      alert("You have successfully logged out.");
     }
   };
 
@@ -41,7 +40,6 @@ const Sidebar = () => {
               />
               {item.path === "/logout" ? (
                 <button
-                  onClick={handleLogout}
                   className="flex items-center p-2 rounded size-10"
                 >
                   {item.name}

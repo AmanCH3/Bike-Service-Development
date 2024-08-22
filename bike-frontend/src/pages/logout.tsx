@@ -6,11 +6,12 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Perform logout logic here, such as clearing tokens or user data
-    alert("You have successfully logged out.");
-    // Redirect to the home page after logout
-    navigate("/");
-  }, [navigate]);
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+    if (confirmLogout) {
+      localStorage.clear();
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white">

@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 /media/xhacker/New Volue/dsa/Bike-Service-Development/backend-bike/src/test/java/com/example/backend/BackendApplicationTests.java
-=======
-/home/amanch/Public/Bike-Service-Development/backend-bike/src/test/java/com/example/backend/UserRepositoryTest.java
-/home/amanch/Public/Bike-Service-Development/backend-bike/src/test/java/com/example/backend/BackendApplicationTests.java
->>>>>>> 53abfa8fa10089e79d6827ebee15b9be27d0b87b
+/media/xhacker/New Volue/dsa/Bike-Service-Development/backend-bike/src/test/java/com/example/backend/UserRepositoryTest.java
